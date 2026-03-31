@@ -9,13 +9,13 @@ import {
 export default function BottomNav({ activeTab, setActiveTab }) {
   const tabs = [
     { id: 'dashboard', icon: LayoutGrid, label: 'ACCUEIL' },
-    { id: 'calendar', icon: Calendar, label: 'CALENDRIER' },
+    { id: 'calendar', icon: Calendar, label: 'CAL' },
     { id: 'progress', icon: BarChart2, label: 'SUIVI' },
-    { id: 'settings', icon: Settings, label: 'RÉGLAGES' },
+    { id: 'settings', icon: Settings, label: 'PRÉF' },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[380px] z-[60] flex justify-center pb-8 pt-4 px-2 bg-gradient-to-t from-black via-black/80 to-transparent">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[340px] z-[60] flex justify-center pb-8 pt-4 px-3 bg-gradient-to-t from-black via-black/80 to-transparent">
       <div className="w-full bg-[#0a0a0a]/98 backdrop-blur-2xl rounded-full p-1.5 flex justify-between items-center border border-white/5 shadow-[0_-10px_25px_rgba(0,0,0,0.5)]">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -25,8 +25,8 @@ export default function BottomNav({ activeTab, setActiveTab }) {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex flex-col items-center gap-1.5 px-4 py-2.5 rounded-full transition-all duration-300 ${
-                isActive ? 'text-primary scale-105' : 'text-text-dim hover:text-white/60'
+              className={`flex flex-col items-center gap-1.5 px-3.5 py-2.5 rounded-full transition-all duration-300 ${
+                isActive ? 'text-primary scale-105 bg-white/5' : 'text-text-dim hover:text-white/40'
               }`}
             >
               <Icon 
