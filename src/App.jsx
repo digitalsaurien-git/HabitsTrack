@@ -151,28 +151,31 @@ export default function App() {
             onDelete={handleDeleteJournal} 
           />
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-8 mt-10">
             {surchargeAlert && (
-              <div className="glass-heavy bg-danger/5 border-danger/20 p-5 rounded-3xl flex gap-4 animate-scale">
-                <div className="p-3 bg-danger/10 rounded-2xl text-danger h-fit">
+              <div className="glass bg-primary/5 border-primary/20 p-5 rounded-3xl flex gap-4 animate-scale">
+                <div className="p-3 bg-primary/10 rounded-2xl text-primary h-fit shadow-glow">
                   <AlertTriangle size={24} />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="text-sm font-black text-danger uppercase tracking-tight">Surcharge détectée !</h4>
-                  <p className="text-xs text-danger/70 font-medium">Attention, vous avez trop de tâches lourdes aujourd'hui. Pensez à déléguer ou prioriser.</p>
+                  <h4 className="text-sm font-black text-white uppercase tracking-tight">Surcharge détectée</h4>
+                  <p className="text-[11px] text-text-dim font-medium leading-relaxed">Attention, vous avez trop de tâches lourdes aujourd'hui. Priorisez l'essentiel.</p>
                 </div>
               </div>
             )}
 
             {filteredHabits.length === 0 ? (
-              <div className="py-20 text-center space-y-4 animate-fade">
-                <div className="mx-auto w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-gray-300">
-                  <LayoutGrid size={40} />
+              <div className="py-24 text-center space-y-6 animate-fade">
+                <div className="mx-auto w-24 h-24 bg-surface-low rounded-[32px] flex items-center justify-center text-surface-bright border border-white/5">
+                  <Activity size={48} />
                 </div>
-                <p className="text-gray-400 font-bold text-sm tracking-wide uppercase">Aucune habitude ici.</p>
+                <div className="space-y-2">
+                  <p className="text-white font-extrabold text-base tracking-tight">C'est le calme plat ici</p>
+                  <p className="text-xs text-text-dim font-medium">Commencez par ajouter votre première habitude.</p>
+                </div>
                 <button 
                   onClick={() => setIsFormOpen(true)}
-                  className="text-secondary font-black text-xs underline underline-offset-4"
+                  className="btn-primary"
                 >
                   Ajouter une tâche
                 </button>
@@ -187,7 +190,7 @@ export default function App() {
                   items={filteredHabits}
                   strategy={verticalListSortingStrategy}
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-4 pb-10">
                     {filteredHabits.map(habit => (
                       <HabitCard 
                         key={habit.id} 

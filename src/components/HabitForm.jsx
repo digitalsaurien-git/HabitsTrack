@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Check, AlertCircle } from 'lucide-react';
+import { X, Check, AlertCircle, Sparkles } from 'lucide-react';
 
 export default function HabitForm({ 
   onSubmit, 
@@ -20,50 +20,53 @@ export default function HabitForm({
 
   useEffect(() => {
     if (initialData) setFormData({ ...formData, ...initialData });
-  }, [initialData]);
+  }, [initialData, isOpen]);
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-4">
       <div 
-        className="absolute inset-0 bg-black/40 backdrop-blur-md animate-fade"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade"
         onClick={onClose}
       />
       
-      <div className="glass-heavy w-full max-w-md rounded-[32px] overflow-hidden shadow-2xl relative animate-scale">
-        <div className="p-6 space-y-6">
+      <div className="glass-heavy w-full max-w-md rounded-[32px] overflow-hidden border border-white/10 shadow- premium relative animate-scale">
+        <div className="p-8 space-y-8">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-black text-secondary tracking-tight">
-              {initialData?.id ? 'Modifier l\'habitude' : 'Nouvelle habitude'}
-            </h2>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                <Sparkles className="text-primary" size={20} />
+              </div>
+              <h2 className="text-xl font-extrabold text-white tracking-tight">
+                {initialData?.id ? 'Modifier' : 'Nouveau'}
+              </h2>
+            </div>
             <button 
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full text-gray-400"
+              className="p-2 hover:bg-surface-bright rounded-xl text-surface-bright transition-colors"
             >
               <X size={20} />
             </button>
           </div>
 
           {showSurchargeAlert && formData.mentalLoad === 'chronophage' && (
-            <div className="bg-danger/10 border border-danger/20 p-4 rounded-2xl flex gap-3 text-danger animate-pulse">
+            <div className="bg-primary/5 border border-primary/20 p-4 rounded-2xl flex gap-3 text-primary animate-pulse">
               <AlertCircle size={20} />
-              <div className="text-xs font-bold leading-tight uppercase tracking-wider">
-                Attention : vous avez déjà 3+ tâches chronophages pour demain !
+              <div className="text-[10px] font-black uppercase tracking-wider leading-tight">
+                Attention : surcharge mentale détectée (3+ tâches lourdes) !
               </div>
             </div>
           )}
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {/* Title */}
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 px-1">
-                Titre de l'habitude
-              </label>
+            <div className="space-y-2">
+              <label className="label-caps opacity-50 px-1">Intitulé</label>
               <input 
                 type="text" 
-                placeholder="Ex. Faire du sport, Méditer..."
-                className="w-full bg-white border border-gray-100 rounded-2xl p-4 text-lg font-bold placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                placeholder="Ex. Méditation matinale..."
+                className="w-full bg-surface-low border border-white/5 rounded-2xl p-4 text-white font-bold placeholder:text-surface-bright focus:outline-none focus:border-primary/30"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               />
@@ -73,53 +76,38 @@ export default function HabitForm({
             <div className="grid grid-cols-2 gap-3">
               <button 
                 onClick={() => setFormData({ ...formData, category: 'perso' })}
-                className={`py-3 rounded-2xl text-sm font-bold border transition-all ${
+                className={`py-3.5 rounded-2xl text-xs font-black uppercase tracking-wider border transition-all duration-300 ${
                   formData.category === 'perso' 
-                  ? 'bg-perso/10 border-perso text-perso' 
-                  : 'bg-white border-gray-100 text-gray-400 hover:border-perso/30'
+                  ? 'bg-primary/20 border-primary shadow-glow text-white' 
+                  : 'bg-surface-low border-white/5 text-surface-bright hover:bg-surface-high'
                 }`}
               >
-                Perso
+                Personnel
               </button>
               <button 
                 onClick={() => setFormData({ ...formData, category: 'pro' })}
-                className={`py-3 rounded-2xl text-sm font-bold border transition-all ${
+                className={`py-3.5 rounded-2xl text-xs font-black uppercase tracking-wider border transition-all duration-300 ${
                   formData.category === 'pro' 
-                  ? 'bg-pro/10 border-pro text-pro' 
-                  : 'bg-white border-gray-100 text-gray-400 hover:border-pro/30'
+                  ? 'bg-primary/20 border-primary shadow-glow text-white' 
+                  : 'bg-surface-low border-white/5 text-surface-bright hover:bg-surface-high'
                 }`}
               >
-                Pro
+                Professionnel
               </button>
             </div>
 
-            {/* Description */}
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 px-1">
-                Description courte
-              </label>
-              <textarea 
-                placeholder="Quel est l'objectif ?"
-                className="w-full bg-white border border-gray-100 rounded-2xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary min-h-[80px] resize-none"
-                value={formData.desc}
-                onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
-              />
-            </div>
-
             {/* Mental Load Selection */}
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 px-1">
-                Niveau de charge mentale
-              </label>
+            <div className="space-y-3">
+              <label className="label-caps opacity-50 px-1">Charge mentale</label>
               <div className="grid grid-cols-3 gap-2">
                 {['light', 'medium', 'chronophage'].map(load => (
                   <button 
                     key={load}
                     onClick={() => setFormData({ ...formData, mentalLoad: load })}
-                    className={`py-2 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all ${
+                    className={`py-3 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all duration-300 ${
                       formData.mentalLoad === load 
-                      ? 'bg-secondary text-white shadow-lg shadow-secondary/20' 
-                      : 'bg-white text-gray-400 border-gray-100'
+                      ? 'bg-surface-high text-white border-primary shadow-glow' 
+                      : 'bg-surface-low text-surface-bright border-white/5'
                     }`}
                   >
                     {load === 'light' ? 'Léger' : load === 'medium' ? 'Moyen' : 'Lourd'}
@@ -131,10 +119,10 @@ export default function HabitForm({
 
           <button 
             onClick={() => onSubmit(formData)}
-            className="w-full bg-secondary text-white p-5 rounded-[24px] font-black text-lg shadow-xl shadow-secondary/10 hover:translate-y-[-2px] active:translate-y-[0] transition-all flex items-center justify-center gap-3"
+            className="w-full btn-primary py-5 rounded-[24px] text-lg shadow-2xl flex items-center justify-center gap-3 active:scale-95 mt-4"
           >
             <Check size={24} strokeWidth={3} />
-            Enregistrer
+            Confirmer
           </button>
         </div>
       </div>

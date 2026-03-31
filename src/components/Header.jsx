@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, LayoutGrid, Briefcase, User, BarChart3 } from 'lucide-react';
+import { Plus, LayoutGrid, Briefcase, User, Activity } from 'lucide-react';
 
 export default function Header({ 
   view, 
@@ -9,69 +9,93 @@ export default function Header({
   totalCount 
 }) {
   const percentage = totalCount > 0 ? (progressCount / totalCount) * 100 : 0;
+  const radius = 36;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <header className="glass-heavy sticky top-0 z-50 px-4 py-4 mb-6 shadow-sm border-b">
-      <div className="max-w-md mx-auto space-y-4">
-        {/* Title and Add Button */}
+    <header className="glass sticky top-0 z-50 px-6 py-6 border-b border-white/5 shadow-2xl">
+      <div className="max-w-md mx-auto space-y-8">
+        {/* Top Bar: Logo & Add */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-primary rounded-xl text-secondary shadow-inner">
-              <LayoutGrid size={24} strokeWidth={2.5} />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-surface-high flex items-center justify-center border border-white/5 shadow-inner">
+              <Activity className="text-primary" size={22} />
             </div>
-            <h1 className="text-xl font-black text-secondary tracking-tight">HabitsTrack</h1>
+            <div>
+              <h1 className="text-lg font-extrabold tracking-tight text-white leading-none">HabitsTrack</h1>
+              <p className="label-caps mt-1">Tableau de bord</p>
+            </div>
           </div>
           
           <button 
             onClick={onAddClick}
-            className="p-3 bg-secondary text-white rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all"
+            className="w-12 h-12 bg-primary-gradient text-white rounded-2xl shadow-glow flex items-center justify-center hover:scale-105 active:scale-95"
           >
-            <Plus size={24} strokeWidth={2.5} />
+            <Plus size={26} strokeWidth={3} />
           </button>
         </div>
 
-        {/* Categories Toggle */}
-        <div className="grid grid-cols-2 p-1 bg-gray-100/50 rounded-2xl border border-gray-100">
+        {/* Circular Progress Section */}
+        <div className="flex items-center justify-center py-4">
+          <div className="relative flex items-center justify-center">
+            <svg className="w-40 h-40 transform -rotate-90">
+              {/* Background circle */}
+              <circle
+                cx="80"
+                cy="80"
+                r={radius}
+                stroke="var(--surface-high)"
+                strokeWidth="8"
+                fill="transparent"
+              />
+              {/* Progress circle */}
+              <circle
+                cx="80"
+                cy="80"
+                r={radius}
+                stroke="var(--primary)"
+                strokeWidth="8"
+                fill="transparent"
+                strokeDasharray={circumference}
+                style={{ 
+                  strokeDashoffset,
+                  transition: 'stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                  strokeLinecap: 'round'
+                }}
+              />
+            </svg>
+            <div className="absolute flex flex-col items-center">
+              <span className="text-3xl font-black text-white">{Math.round(percentage)}%</span>
+              <span className="label-caps opacity-50">{progressCount} / {totalCount}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Pro/Perso Toggle */}
+        <div className="flex p-1.5 bg-surface-low rounded-[20px] border border-white/5">
           <button 
             onClick={() => setView('perso')}
-            className={`flex items-center justify-center gap-2 py-2.5 rounded-xl transition-all ${
+            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-[14px] text-xs font-bold transition-all ${
               view === 'perso' 
-              ? 'bg-white shadow-sm text-perso font-bold' 
-              : 'text-gray-500 hover:bg-white/50'
+              ? 'bg-surface-bright text-white shadow-xl scale-[1.02]' 
+              : 'text-text-dim hover:text-white'
             }`}
           >
-            <User size={18} />
-            <span>Perso</span>
+            <User size={16} className={view === 'perso' ? 'text-primary' : ''} />
+            <span>Personnel</span>
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex items-center justify-center gap-2 py-2.5 rounded-xl transition-all ${
+            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-[14px] text-xs font-bold transition-all ${
               view === 'pro' 
-              ? 'bg-white shadow-sm text-pro font-bold' 
-              : 'text-gray-500 hover:bg-white/50'
+              ? 'bg-surface-bright text-white shadow-xl scale-[1.02]' 
+              : 'text-text-dim hover:text-white'
             }`}
           >
-            <Briefcase size={18} />
-            <span>Pro</span>
+            <Briefcase size={16} className={view === 'pro' ? 'text-primary' : ''} />
+            <span>Professionnel</span>
           </button>
-        </div>
-
-        {/* Progress Display */}
-        <div className="space-y-2 px-1">
-          <div className="flex justify-between items-end">
-            <span className="text-sm font-semibold text-text-muted flex items-center gap-1">
-              <BarChart3 size={14} /> Progression du jour
-            </span>
-            <span className="text-xs font-bold bg-success/10 text-success px-2 py-0.5 rounded-full">
-              {progressCount}/{totalCount}
-            </span>
-          </div>
-          <div className="h-2.5 w-full bg-gray-200/50 rounded-full overflow-hidden border border-white/40">
-            <div 
-              className="h-full bg-success transition-all duration-700 ease-out rounded-full shadow-[0_0_8px_rgba(129,199,132,0.5)]"
-              style={{ width: `${percentage}%` }}
-            />
-          </div>
         </div>
       </div>
     </header>

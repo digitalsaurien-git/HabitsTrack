@@ -29,31 +29,31 @@ export default function HabitCard({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
-    zIndex: isDragging ? 10 : 1,
+    opacity: isDragging ? 0.6 : 1,
+    zIndex: isDragging ? 100 : 1,
   };
 
   const getLoadBadge = (load) => {
     switch (load) {
       case 'chronophage':
         return { 
-          icon: <Flame size={14} />, 
+          icon: <Flame size={12} />, 
           bg: 'bg-danger/10', 
           color: 'text-danger',
-          label: 'Chronophage'
+          label: 'Critique'
         };
       case 'medium':
         return { 
-          icon: <Zap size={14} />, 
-          bg: 'bg-warning/10', 
-          color: 'text-warning',
+          icon: <Zap size={12} />, 
+          bg: 'bg-primary/10', 
+          color: 'text-primary',
           label: 'Moyen'
         };
       default:
         return { 
-          icon: <Leaf size={14} />, 
-          bg: 'bg-success/10', 
-          color: 'text-success',
+          icon: <Leaf size={12} />, 
+          bg: 'bg-secondary/10', 
+          color: 'text-secondary',
           label: 'Léger'
         };
     }
@@ -65,47 +65,19 @@ export default function HabitCard({
     <div 
       ref={setNodeRef} 
       style={style}
-      className={`glass rounded-3xl p-5 border border-white/50 transition-all duration-300 animate-scale ${
-        isCompletedToday ? 'bg-success/5 border-success/20' : ''
+      className={`premium-card p-4 animate-scale ${
+        isCompletedToday ? 'opacity-80' : ''
       }`}
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-center gap-4">
         {/* Drag Handle */}
         <button 
           {...attributes} 
           {...listeners}
-          className="mt-1 text-gray-300 hover:text-gray-400 cursor-grab active:cursor-grabbing"
+          className="text-surface-bright hover:text-text-dim cursor-grab active:cursor-grabbing"
         >
           <GripVertical size={20} />
         </button>
-
-        {/* Content */}
-        <div className="flex-1 space-y-3" onClick={() => onEdit(habit)}>
-          <div className="flex justify-between items-start">
-            <h3 className={`text-lg font-bold tracking-tight transition-all duration-500 ${
-              isCompletedToday ? 'text-success opacity-70 line-through' : 'text-text-main'
-            }`}>
-              {habit.title}
-            </h3>
-            
-            <button className="text-gray-300 hover:text-gray-500 p-1">
-              <MoreVertical size={18} />
-            </button>
-          </div>
-
-          <p className="text-sm text-text-muted line-clamp-2 leading-relaxed">
-            {habit.desc || "Pas de description"}
-          </p>
-
-          <div className="flex items-center gap-3">
-            <span className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${badge.bg} ${badge.color}`}>
-              {badge.icon} {badge.label}
-            </span>
-            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest px-2 py-1 bg-gray-100/50 rounded-full">
-              {habit.frequency || 'Quotidien'}
-            </span>
-          </div>
-        </div>
 
         {/* Action Button (1-Click) */}
         <button 
@@ -113,17 +85,41 @@ export default function HabitCard({
             e.stopPropagation();
             onToggle(habit.id);
           }}
-          className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-sm ${
+          className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-xl ${
             isCompletedToday 
-            ? 'bg-success text-white scale-110 shadow-[0_0_15px_rgba(129,199,132,0.4)]' 
-            : 'bg-white border-2 border-gray-100 text-gray-200 hover:border-success/30 hover:text-success/50'
+            ? 'bg-secondary text-white scale-110 shadow-[0_0_15px_rgba(34,197,94,0.3)]' 
+            : 'bg-surface-low border border-white/5 text-surface-bright hover:border-primary/30 hover:text-primary'
           }`}
         >
           {isCompletedToday 
-            ? <CheckCircle2 size={28} strokeWidth={2.5} /> 
-            : <Circle size={28} strokeWidth={2.5} />
+            ? <CheckCircle2 size={24} strokeWidth={3} /> 
+            : <Circle size={24} strokeWidth={2.5} />
           }
         </button>
+
+        {/* Content */}
+        <div className="flex-1 min-w-0" onClick={() => onEdit(habit)}>
+          <div className="flex justify-between items-center mb-1">
+            <h3 className={`text-[15px] font-bold tracking-tight truncate transition-all duration-500 ${
+              isCompletedToday ? 'text-secondary line-through' : 'text-white'
+            }`}>
+              {habit.title}
+            </h3>
+            
+            <button className="text-surface-bright hover:text-text-dim p-1">
+              <MoreVertical size={16} />
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className={`flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-[9px] font-bold uppercase tracking-wider ${badge.bg} ${badge.color}`}>
+              {badge.icon} {badge.label}
+            </span>
+            <span className="label-caps opacity-40 px-1 border-l border-white/10 ml-1">
+              {habit.frequency || 'Quotidien'}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
