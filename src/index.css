@@ -1,31 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  /* Colors - Anthracite Kinetic Luxe */
-  --bg-dark: #000000;
-  --bg-gradient: radial-gradient(circle at top right, #1a1e26 0%, #000000 100%);
-  --surface-low: #111318;
-  --surface: #171a1e;
-  --surface-high: #1d2025;
-  --surface-bright: #292c32;
+@theme {
+  --color-primary: #ff6b00;
+  --color-secondary: #22c55e;
+  --color-surface: #171a1e;
+  --color-surface-low: #111318;
+  --color-surface-high: #1d2025;
+  --color-surface-bright: #292c32;
+  --color-text-dim: #848995;
   
-  --primary: #ff6b00;
-  --primary-glow: rgba(255, 107, 0, 0.4);
-  --secondary: #22c55e;
-  --secondary-glow: rgba(34, 197, 94, 0.4);
-  
-  --text: #ffffff;
-  --text-dim: #848995;
-  --border: rgba(255, 255, 255, 0.05);
+  --shadow-glow: 0 0 20px rgba(255, 107, 0, 0.2);
+  --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.4);
+  --shadow-luxe: 0 20px 40px rgba(0, 0, 0, 0.8);
   
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 16px;
-  
-  --shadow-luxe: 0 20px 40px rgba(0, 0, 0, 0.8);
-  --glass: rgba(23, 26, 30, 0.8);
+}
+
+:root {
+  /* Vanilla fallback variables if needed */
+  --bg-dark: #000000;
+  --bg-gradient: radial-gradient(circle at top right, #1a1e26 0%, #000000 100%);
+  --primary: #ff6b00;
+  --primary-glow: rgba(255, 107, 0, 0.4);
+  --secondary: #22c55e;
+  --text-dim: #848995;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -41,84 +41,56 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg-gradient);
   background-attachment: fixed;
-  color: var(--text);
+  color: white;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Premium Layout Components */
+/* Custom premium classes */
 .glass-nav {
-  background: rgba(13, 15, 19, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border);
+  @apply bg-[#0d0f13]/95 backdrop-blur-[20px] border-t border-white/5;
 }
 
 .premium-card {
-  background: linear-gradient(135deg, #1d2025 0%, #171a1e 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  @apply bg-gradient-to-br from-[#1d2025] to-[#171a1e] border border-white/5 shadow-premium transition-all duration-300;
+  border-radius: theme(--radius-lg);
 }
 
 .premium-card:active {
-  transform: scale(0.98);
-  background: #23262c;
+  @apply scale-[0.98] bg-[#23262c];
 }
 
-/* Typography Utilities */
 .label-caps {
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--text-dim);
+  @apply text-[10px] font-extrabold uppercase tracking-[0.15em] text-text-dim;
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #ff9159 0%, #f66700 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  @apply bg-gradient-to-br from-[#ff9159] to-[#f66700] bg-clip-text text-transparent;
 }
 
-/* Buttons */
 .fab-orange {
-  background: linear-gradient(135deg, #ff9159 0%, #f66700 100%);
-  box-shadow: 0 10px 25px var(--primary-glow);
-  color: white;
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  @apply bg-gradient-to-br from-[#ff9159] to-[#f66700] shadow-[0_10px_25px_var(--primary-glow)] text-white transition-all duration-300;
 }
 
 .fab-orange:active {
-  transform: scale(0.9) rotate(-10deg);
+  @apply scale-[0.9] -rotate-12;
 }
 
-/* Icons & Badges */
 .icon-circle {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  @apply w-11 h-11 rounded-[14px] flex items-center justify-center bg-white/5 border border-white/10;
 }
 
 .check-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  @apply w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500;
 }
 
-/* Animations */
+.progress-ring-circle {
+  @apply transition-all duration-1000;
+  stroke: var(--primary);
+  filter: drop-shadow(0 0 8px var(--primary-glow));
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
@@ -126,11 +98,4 @@ body {
 
 .animate-fade {
   animation: fadeIn 0.4s ease-out forwards;
-}
-
-/* Circular Progress Custom */
-.progress-ring-circle {
-  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
-  stroke: var(--primary);
-  filter: drop-shadow(0 0 8px var(--primary-glow));
 }
