@@ -65,9 +65,10 @@ export default function HabitCard({ habit, onToggle, onEdit, isCompletedToday })
 
       <button 
         onClick={() => onToggle(habit.id)}
+        aria-label={isCompletedToday ? "Annuler le marquage de l'habitude" : "Marquer l'habitude comme terminée"}
         className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-500 ${
           isCompletedToday 
-          ? 'bg-secondary text-white shadow-glow scale-105' 
+          ? 'bg-secondary text-white shadow-glow scale-105 shadow-[0_0_20px_rgba(34,197,94,0.3)]' 
           : 'bg-white/5 border border-white/10 hover:border-primary/40 text-transparent'
         }`}
       >

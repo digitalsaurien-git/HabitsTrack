@@ -16,7 +16,7 @@ export default function Header({
     <header className="pt-16 pb-2 animate-fade">
       {/* Top Bar - Clean and detached */}
       <div className="flex justify-between items-center px-6">
-        <button className="text-text-dim hover:text-white transition-colors p-2">
+        <button className="text-text-dim hover:text-white transition-colors p-2" aria-label="Menu">
           <Menu size={24} />
         </button>
         <div className="flex items-center gap-2">
@@ -35,7 +35,7 @@ export default function Header({
       </div>
 
       {/* Circular Progress Section */}
-      <div className="relative flex flex-col items-center mt-12">
+      <div className="relative flex flex-col items-center mt-14">
         <div className="relative w-72 h-72 flex items-center justify-center">
           <svg className="w-full h-full transform -rotate-90 scale-x-[-1]">
             <circle
@@ -77,16 +77,16 @@ export default function Header({
         </div>
 
         {/* Space added between gauge and slogan */}
-        <div className="mt-12 text-center">
-          <h2 className="text-3xl font-black text-white tracking-tight leading-none mb-4">Gardez le rythme.</h2>
-          <p className="text-[10px] text-text-dim font-black uppercase tracking-[0.25em] opacity-30">
+        <div className="mt-14 text-center">
+          <h2 className="text-3xl font-black text-white tracking-tight leading-none mb-5">Gardez le rythme.</h2>
+          <p className="text-[10px] text-text-dim/60 font-black uppercase tracking-[0.25em] mt-2">
             {totalCount - progressCount} {totalCount - progressCount > 1 ? 'Tâches Restantes' : 'Tâche Restante'}
           </p>
         </div>
       </div>
 
-      {/* Mode Toggle Tabs - Large space with slogan above */}
-      <div className="px-6 mt-16 mb-12">
+      {/* Mode Toggle Tabs - EXTRA LARGE SPACE BELOW (32rem / 128px target) */}
+      <div className="px-6 mt-16 mb-32">
         <div className="bg-black/90 rounded-[30px] p-2 flex border border-white/5 shadow-inner">
           <button 
             onClick={() => setView('perso')}
@@ -100,7 +100,7 @@ export default function Header({
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex-1 py-5 rounded-[26px] text-sm font-black transition-all duration-300 uppercase tracking-widest ${
+            className={`flex-1 py-5 rounded-[26px] text-sm font-black transition-all duration-500 uppercase tracking-widest ${
               view === 'pro' 
               ? 'bg-white text-black shadow-2xl scale-[1.02]' 
               : 'text-text-dim hover:text-white'
