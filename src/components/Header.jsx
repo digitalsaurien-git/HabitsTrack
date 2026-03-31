@@ -86,11 +86,11 @@ export default function Header({
       </div>
 
       {/* Mode Toggle Tabs - Large space with slogan above */}
-      <div className="px-6 mt-16 mb-4">
-        <div className="bg-black/90 rounded-[30px] p-1.5 flex border border-white/5 shadow-inner">
+      <div className="px-6 mt-16 mb-12">
+        <div className="bg-black/90 rounded-[30px] p-2 flex border border-white/5 shadow-inner">
           <button 
             onClick={() => setView('perso')}
-            className={`flex-1 py-4.5 rounded-[26px] text-xs font-black transition-all duration-300 uppercase tracking-widest ${
+            className={`flex-1 py-5 rounded-[26px] text-sm font-black transition-all duration-300 uppercase tracking-widest ${
               view === 'perso' 
               ? 'bg-white text-black shadow-2xl scale-[1.02]' 
               : 'text-text-dim hover:text-white'
@@ -100,7 +100,7 @@ export default function Header({
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex-1 py-4.5 rounded-[26px] text-xs font-black transition-all duration-500 uppercase tracking-widest ${
+            className={`flex-1 py-5 rounded-[26px] text-sm font-black transition-all duration-300 uppercase tracking-widest ${
               view === 'pro' 
               ? 'bg-white text-black shadow-2xl scale-[1.02]' 
               : 'text-text-dim hover:text-white'
