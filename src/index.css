@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Colors - Anthracite Kinetic Luxe */
   --bg-dark: #000000;
@@ -76,6 +80,7 @@ body {
 .text-gradient {
   background: linear-gradient(135deg, #ff9159 0%, #f66700 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
