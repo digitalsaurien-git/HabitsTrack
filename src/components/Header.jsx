@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell, Zap, Menu } from 'lucide-react';
+import { Zap, Menu } from 'lucide-react';
 
 export default function Header({ 
   view, 
@@ -13,8 +13,8 @@ export default function Header({
   const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <header className="pt-14 pb-4 animate-fade">
-      {/* Top Bar */}
+    <header className="pt-16 pb-2 animate-fade">
+      {/* Top Bar - Clean and detached */}
       <div className="flex justify-between items-center px-6">
         <button className="text-text-dim hover:text-white transition-colors p-2">
           <Menu size={24} />
@@ -35,7 +35,7 @@ export default function Header({
       </div>
 
       {/* Circular Progress Section */}
-      <div className="relative flex flex-col items-center mt-12 mb-16">
+      <div className="relative flex flex-col items-center mt-12">
         <div className="relative w-72 h-72 flex items-center justify-center">
           <svg className="w-full h-full transform -rotate-90 scale-x-[-1]">
             <circle
@@ -72,26 +72,27 @@ export default function Header({
               </span>
               <span className="text-2xl font-black text-primary ml-1">%</span>
             </div>
-            <span className="label-caps opacity-20 mt-3 tracking-[0.3em]">SCORE DU JOUR</span>
+            <span className="label-caps opacity-20 mt-3 tracking-[0.3em]">PROGRESSION</span>
           </div>
         </div>
 
-        <div className="mt-8 text-center space-y-3">
-          <h2 className="text-3xl font-black text-white tracking-tight leading-none">Restez Kinetic.</h2>
-          <p className="text-xs text-text-dim font-bold uppercase tracking-widest opacity-40">
+        {/* Space added between gauge and slogan */}
+        <div className="mt-12 text-center">
+          <h2 className="text-3xl font-black text-white tracking-tight leading-none mb-4">Gardez le rythme.</h2>
+          <p className="text-[10px] text-text-dim font-black uppercase tracking-[0.25em] opacity-30">
             {totalCount - progressCount} {totalCount - progressCount > 1 ? 'Tâches Restantes' : 'Tâche Restante'}
           </p>
         </div>
       </div>
 
-      {/* Mode Toggle Tabs - Black styling with white text/highlight */}
-      <div className="px-6 mt-10">
-        <div className="bg-black/80 rounded-[28px] p-1.5 flex border border-white/5 shadow-inner">
+      {/* Mode Toggle Tabs - Large space with slogan above */}
+      <div className="px-6 mt-16 mb-4">
+        <div className="bg-black/90 rounded-[30px] p-1.5 flex border border-white/5 shadow-inner">
           <button 
             onClick={() => setView('perso')}
-            className={`flex-1 py-4 rounded-[24px] text-[10px] font-black transition-all duration-500 uppercase tracking-[0.15em] ${
+            className={`flex-1 py-4.5 rounded-[26px] text-xs font-black transition-all duration-300 uppercase tracking-widest ${
               view === 'perso' 
-              ? 'bg-white/95 text-black shadow-2xl scale-[1.02]' 
+              ? 'bg-white text-black shadow-2xl scale-[1.02]' 
               : 'text-text-dim hover:text-white'
             }`}
           >
@@ -99,9 +100,9 @@ export default function Header({
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex-1 py-4 rounded-[24px] text-[10px] font-black transition-all duration-500 uppercase tracking-[0.15em] ${
+            className={`flex-1 py-4.5 rounded-[26px] text-xs font-black transition-all duration-500 uppercase tracking-widest ${
               view === 'pro' 
-              ? 'bg-white/95 text-black shadow-2xl scale-[1.02]' 
+              ? 'bg-white text-black shadow-2xl scale-[1.02]' 
               : 'text-text-dim hover:text-white'
             }`}
           >

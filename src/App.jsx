@@ -87,8 +87,9 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-[#050505] flex flex-col items-center">
-      <div className="w-full max-w-[400px] min-h-screen relative pb-40">
+    <div className="min-h-screen bg-[#050505] flex flex-col items-center overflow-x-hidden">
+      {/* Absolute narrow format (380px) centered */}
+      <div className="w-full max-w-[380px] min-h-screen relative pb-44 px-2">
         <Header 
           view={view} 
           setView={setView}
@@ -96,9 +97,9 @@ export default function App() {
           totalCount={habits.length}
         />
 
-        <main className="px-6 mt-2">
+        <main className="px-4">
           {activeTab === 'dashboard' ? (
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-5 mt-10">
               {filteredHabits.map(habit => (
                 <HabitCard 
                   key={habit.id} 
@@ -110,7 +111,7 @@ export default function App() {
               ))}
             </div>
           ) : activeTab === 'settings' ? (
-            <div className="animate-fade space-y-2 pt-6">
+            <div className="animate-fade space-y-2 pt-6 px-4">
               <h3 className="label-caps opacity-30 px-2 mb-4 tracking-[0.2em] uppercase">Mon Profil</h3>
               <div className="p-6 premium-card mb-8 flex items-center gap-5 border-none bg-[#111]">
                 <div className="w-16 h-16 rounded-3xl bg-primary/20 flex items-center justify-center border border-primary/30 shadow-glow">
@@ -139,7 +140,7 @@ export default function App() {
 
         <button 
           onClick={() => setIsFormOpen(true)}
-          className="fixed bottom-32 left-1/2 -translate-x-1/2 ml-36 w-14 h-14 fab-orange rounded-[20px] flex items-center justify-center z-50 shadow-2xl active:scale-90 transition-all border border-white/10"
+          className="fixed bottom-36 left-1/2 -translate-x-1/2 ml-32 w-14 h-14 fab-orange rounded-2xl flex items-center justify-center z-50 shadow-2xl active:scale-95 transition-all border border-white/5"
         >
           <Plus size={28} strokeWidth={3.5} />
         </button>
