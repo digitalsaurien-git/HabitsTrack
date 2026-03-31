@@ -20,10 +20,8 @@ const INITIAL_HABITS = [
 ];
 
 export default function App() {
-  // Force loading dummy data for the first view of the new design
   const [habits, setHabits] = useState(() => {
     const saved = loadData(STORAGE_KEYS.HABITS, []);
-    // If the data doesn't contain our new streak field or is just 1 item, replace it
     if (saved.length <= 1 || !saved[0].streak) return INITIAL_HABITS;
     return saved;
   });
@@ -71,42 +69,45 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen relative pb-32">
-      <Header 
-        view={view} 
-        setView={setView}
-        progressCount={progressCount}
-        totalCount={habits.length}
-      />
+    <div className="min-h-screen bg-black flex flex-col items-center">
+      {/* Container wrapper to enforce max-width and centering */}
+      <div className="w-full max-w-lg min-h-screen relative pb-32">
+        <Header 
+          view={view} 
+          setView={setView}
+          progressCount={progressCount}
+          totalCount={habits.length}
+        />
 
-      <main className="max-w-md mx-auto px-8 mt-4">
-        {activeTab === 'dashboard' ? (
-          <div className="space-y-4">
-            {filteredHabits.map(habit => (
-              <HabitCard 
-                key={habit.id} 
-                habit={habit} 
-                onToggle={handleToggleHabit}
-                onEdit={(h) => { setEditingHabit(h); setIsFormOpen(true); }}
-                isCompletedToday={habit.completedDates?.includes(today)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-20 text-text-dim italic text-sm">
-            Section {activeTab} en cours...
-          </div>
-        )}
-      </main>
+        <main className="px-8 mt-6">
+          {activeTab === 'dashboard' ? (
+            <div className="space-y-6">
+              {filteredHabits.map(habit => (
+                <HabitCard 
+                  key={habit.id} 
+                  habit={habit} 
+                  onToggle={handleToggleHabit}
+                  onEdit={(h) => { setEditingHabit(h); setIsFormOpen(true); }}
+                  isCompletedToday={habit.completedDates?.includes(today)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-20 text-text-dim italic text-sm">
+              Section {activeTab} en cours...
+            </div>
+          )}
+        </main>
 
-      <button 
-        onClick={() => setIsFormOpen(true)}
-        className="fixed bottom-32 right-8 w-16 h-16 fab-orange rounded-full flex items-center justify-center z-50 animate-scale"
-      >
-        <Plus size={32} strokeWidth={3.5} />
-      </button>
+        <button 
+          onClick={() => setIsFormOpen(true)}
+          className="fixed bottom-32 right-12 w-16 h-16 fab-orange rounded-full flex items-center justify-center z-50 animate-scale"
+        >
+          <Plus size={32} strokeWidth={3.5} />
+        </button>
 
-      <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
+        <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
+      </div>
 
       <HabitForm 
         isOpen={isFormOpen}
