@@ -1,0 +1,14 @@
+- [ ] Project Setup Initialization (Vite + React)
+- [ ] Dependencies Installation (Lucide-React, dnd-kit)
+- [ ] Core Design System (CSS Variables, Glassmorphism utilities)
+- [ ] Local Storage Persistence Layer
+- [ ] App Root State & Surcharge Logic
+- [ ] UI Components Implementation:
+    - [ ] Header & Progress Gauge
+    - [ ] Habit List & Card Components
+    - [ ] Drag & Drop Integration
+    - [ ] Habit Form Modal
+    - [ ] Journal / Logger Module
+- [ ] Animations & Polish
+- [ ] Manual Verification & Local Storage Testing
+- [ ] Final Commit to GitHub
