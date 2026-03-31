@@ -69,9 +69,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center">
-      {/* Container wrapper to enforce max-width and centering */}
-      <div className="w-full max-w-lg min-h-screen relative pb-32">
+    <div className="min-h-screen bg-[#050505] flex flex-col items-center">
+      {/* Container specifically narrow to match Stitch mockup (approx 400px) */}
+      <div className="w-full max-w-[400px] min-h-screen relative pb-40">
         <Header 
           view={view} 
           setView={setView}
@@ -79,9 +79,9 @@ export default function App() {
           totalCount={habits.length}
         />
 
-        <main className="px-8 mt-6">
+        <main className="px-6 mt-2">
           {activeTab === 'dashboard' ? (
-            <div className="space-y-6">
+            <div className="flex flex-col gap-8">
               {filteredHabits.map(habit => (
                 <HabitCard 
                   key={habit.id} 
@@ -101,9 +101,9 @@ export default function App() {
 
         <button 
           onClick={() => setIsFormOpen(true)}
-          className="fixed bottom-32 right-12 w-16 h-16 fab-orange rounded-full flex items-center justify-center z-50 animate-scale"
+          className="fixed bottom-36 left-1/2 -translate-x-1/2 ml-[160px] w-14 h-14 fab-orange rounded-full flex items-center justify-center z-50 animate-scale"
         >
-          <Plus size={32} strokeWidth={3.5} />
+          <Plus size={28} strokeWidth={3.5} />
         </button>
 
         <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />

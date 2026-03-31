@@ -15,8 +15,8 @@ export default function BottomNav({ activeTab, setActiveTab }) {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-[60] flex justify-center pb-8 pt-4 px-4 pointer-events-none">
-      <div className="w-full max-w-lg bg-[#0d0f13]/98 backdrop-blur-3xl rounded-[40px] p-2 flex justify-between items-center border border-white/5 shadow-[0_-20px_40px_rgba(0,0,0,0.5)] pointer-events-auto">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[400px] z-[60] flex justify-center pb-8 pt-4 px-4 bg-gradient-to-t from-black to-transparent">
+      <div className="w-full bg-[#0a0a0a]/98 backdrop-blur-xl rounded-[40px] p-2 flex justify-between items-center border border-white/5 shadow-[0_-15px_30px_rgba(0,0,0,0.4)]">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -25,17 +25,17 @@ export default function BottomNav({ activeTab, setActiveTab }) {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex flex-col items-center gap-1.5 px-6 py-4 rounded-[32px] transition-all duration-500 group ${
-                isActive ? 'bg-white/5 text-white scale-105' : 'text-text-dim hover:text-white'
+              className={`flex flex-col items-center gap-1 px-4 py-3 rounded-[32px] transition-all duration-300 ${
+                isActive ? 'text-primary' : 'text-text-dim hover:text-white/60'
               }`}
             >
               <Icon 
-                size={22} 
+                size={20} 
                 strokeWidth={isActive ? 2.5 : 2}
-                className={`transition-all duration-500 ${isActive ? 'drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]' : 'opacity-60'}`}
+                className={`transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_10px_rgba(255,107,0,0.3)] opacity-100' : 'opacity-40'}`}
               />
-              <span className={`text-[8px] font-black tracking-widest uppercase transition-all duration-500 ${
-                isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
+              <span className={`text-[7px] font-black tracking-widest uppercase transition-all duration-300 ${
+                isActive ? 'opacity-100' : 'opacity-0'
               }`}>
                 {tab.label}
               </span>
