@@ -8,10 +8,10 @@ import {
 
 export default function BottomNav({ activeTab, setActiveTab }) {
   const tabs = [
-    { id: 'dashboard', icon: LayoutGrid, label: 'DASHBOARD' },
-    { id: 'calendar', icon: Calendar, label: 'CALENDAR' },
-    { id: 'progress', icon: BarChart2, label: 'PROGRESS' },
-    { id: 'settings', icon: Settings, label: 'SETTINGS' },
+    { id: 'dashboard', icon: LayoutGrid, label: 'ACCUEIL' },
+    { id: 'calendar', icon: Calendar, label: 'CALENDRIER' },
+    { id: 'progress', icon: BarChart2, label: 'SUIVI' },
+    { id: 'settings', icon: Settings, label: 'RÉGLAGES' },
   ];
 
   return (

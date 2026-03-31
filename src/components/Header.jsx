@@ -13,8 +13,8 @@ export default function Header({
   const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <header className="pt-14 pb-12 space-y-20 animate-fade">
-      {/* Top Bar - Clean and detached */}
+    <header className="pt-14 pb-4 animate-fade">
+      {/* Top Bar */}
       <div className="flex justify-between items-center px-6">
         <button className="text-text-dim hover:text-white transition-colors p-2">
           <Menu size={24} />
@@ -23,19 +23,19 @@ export default function Header({
           <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-glow">
             <Zap size={20} fill="white" className="text-white" />
           </div>
-          <span className="text-lg font-black italic tracking-tighter text-white">HabitsTrack</span>
+          <span className="text-lg font-black italic tracking-tighter text-white uppercase">HabitsTrack</span>
         </div>
-        <div className="w-10 h-10 rounded-full border border-white/10 p-0.5 overflow-hidden">
+        <div className="w-10 h-10 rounded-full border border-white/10 p-0.5 overflow-hidden bg-white/5">
           <img 
             src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop" 
-            alt="Profile" 
-            className="w-full h-full rounded-full object-cover grayscale ml-1-minus"
+            alt="Profil" 
+            className="w-full h-full rounded-full object-cover grayscale"
           />
         </div>
       </div>
 
-      {/* Circular Progress Section - Tall Vertical Band */}
-      <div className="relative flex flex-col items-center">
+      {/* Circular Progress Section */}
+      <div className="relative flex flex-col items-center mt-12 mb-16">
         <div className="relative w-72 h-72 flex items-center justify-center">
           <svg className="w-full h-full transform -rotate-90 scale-x-[-1]">
             <circle
@@ -72,40 +72,40 @@ export default function Header({
               </span>
               <span className="text-2xl font-black text-primary ml-1">%</span>
             </div>
-            <span className="label-caps opacity-20 mt-3 tracking-[0.3em]">DAILY GOAL</span>
+            <span className="label-caps opacity-20 mt-3 tracking-[0.3em]">SCORE DU JOUR</span>
           </div>
         </div>
 
         <div className="mt-8 text-center space-y-3">
-          <h2 className="text-3xl font-black text-white tracking-tight leading-none">Stay Kinetic.</h2>
+          <h2 className="text-3xl font-black text-white tracking-tight leading-none">Restez Kinetic.</h2>
           <p className="text-xs text-text-dim font-bold uppercase tracking-widest opacity-40">
-            {totalCount - progressCount} Tasks Remaining Today
+            {totalCount - progressCount} {totalCount - progressCount > 1 ? 'Tâches Restantes' : 'Tâche Restante'}
           </p>
         </div>
       </div>
 
-      {/* Toggle Tabs - Professional styling */}
-      <div className="px-6">
-        <div className="bg-[#0a0a0a] rounded-full p-1.5 flex border border-white/5 shadow-inner">
+      {/* Mode Toggle Tabs - Black styling with white text/highlight */}
+      <div className="px-6 mt-10">
+        <div className="bg-black/80 rounded-[28px] p-1.5 flex border border-white/5 shadow-inner">
           <button 
             onClick={() => setView('perso')}
-            className={`flex-1 py-3.5 rounded-full text-[10px] font-black transition-all duration-500 uppercase tracking-widest ${
+            className={`flex-1 py-4 rounded-[24px] text-[10px] font-black transition-all duration-500 uppercase tracking-[0.15em] ${
               view === 'perso' 
-              ? 'bg-[#222] text-white shadow-luxe' 
-              : 'text-text-dim'
+              ? 'bg-white/95 text-black shadow-2xl scale-[1.02]' 
+              : 'text-text-dim hover:text-white'
             }`}
           >
-            Personal
+            Personnel
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex-1 py-3.5 rounded-full text-[10px] font-black transition-all duration-500 uppercase tracking-widest ${
+            className={`flex-1 py-4 rounded-[24px] text-[10px] font-black transition-all duration-500 uppercase tracking-[0.15em] ${
               view === 'pro' 
-              ? 'bg-[#222] text-white shadow-luxe' 
-              : 'text-text-dim'
+              ? 'bg-white/95 text-black shadow-2xl scale-[1.02]' 
+              : 'text-text-dim hover:text-white'
             }`}
           >
-            Professional
+            Professionnel
           </button>
         </div>
       </div>

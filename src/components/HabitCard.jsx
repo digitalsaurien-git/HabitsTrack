@@ -13,10 +13,10 @@ import {
 
 const getIcon = (title) => {
   const t = title.toLowerCase();
-  if (t.includes('meditation')) return <Flower2 size={22} className="text-secondary" />;
-  if (t.includes('read') || t.includes('livre')) return <Book size={20} className="text-white opacity-80" />;
+  if (t.includes('méditation') || t.includes('meditation')) return <Flower2 size={22} className="text-secondary" />;
+  if (t.includes('lire') || t.includes('livre') || t.includes('page')) return <Book size={20} className="text-white opacity-80" />;
   if (t.includes('hiit') || t.includes('sport')) return <Dumbbell size={20} className="text-secondary" />;
-  if (t.includes('hydration') || t.includes('eau')) return <Droplets size={20} className="text-blue-400" />;
+  if (t.includes('hygiène') || t.includes('eau') || t.includes('hydratation')) return <Droplets size={20} className="text-blue-400" />;
   return <Target size={20} className="text-primary" />;
 };
 
@@ -40,7 +40,7 @@ export default function HabitCard({ habit, onToggle, onEdit, isCompletedToday })
     <div 
       ref={setNodeRef} 
       style={style}
-      className={`premium-card p-5 flex items-center justify-between group animate-fade shadow-2xl border-white/5 mx-minus-2 ${isCompletedToday ? 'opacity-60' : 'opacity-100'}`}
+      className={`premium-card p-5 flex items-center justify-between group animate-fade shadow-2xl border-white/5 ${isCompletedToday ? 'opacity-60' : 'opacity-100'}`}
     >
       <div 
         {...attributes} 
@@ -57,7 +57,7 @@ export default function HabitCard({ habit, onToggle, onEdit, isCompletedToday })
           <div className="flex items-center gap-1.5 opacity-40">
             <Zap size={9} fill={streak > 0 ? "var(--primary)" : "none"} className={streak > 0 ? "text-primary" : "text-text-dim"} />
             <span className="text-[8px] font-black tracking-widest uppercase">
-              {streak} DAY STREAK
+              {streak} {streak > 1 ? 'JOURS DE SUITE' : 'JOUR DE SUITE'}
             </span>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function HabitCard({ habit, onToggle, onEdit, isCompletedToday })
         onClick={() => onToggle(habit.id)}
         className={`check-btn flex-shrink-0 ${
           isCompletedToday 
-          ? 'bg-secondary text-white shadow-glow scale-105' 
+          ? 'bg-secondary text-white shadow-glow scale-105 shadow-[0_0_20px_rgba(34,197,94,0.3)]' 
           : 'bg-white/5 border border-white/10 hover:border-primary/40 text-transparent'
         }`}
       >
