@@ -31,7 +31,7 @@ export default function HabitForm({
         onClick={onClose}
       />
       
-      <div className="glass-heavy w-full max-w-md rounded-[32px] overflow-hidden border border-white/10 shadow- premium relative animate-scale">
+      <div className="glass-heavy w-full max-w-md rounded-[32px] overflow-hidden border border-white/10 shadow-premium relative animate-scale">
         <div className="p-8 space-y-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
