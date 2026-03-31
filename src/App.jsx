@@ -1,48 +1,39 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
-  DndContext, 
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { 
-  LayoutGrid, 
-  Plus, 
-  CalendarDays, 
-  AlertTriangle,
-  History,
-  BookOpen,
-  Activity
+  Plus
 } from 'lucide-react';
 
 import Header from './components/Header';
 import HabitCard from './components/HabitCard';
 import HabitForm from './components/HabitForm';
-import Journal from './components/Journal';
+import BottomNav from './components/BottomNav';
 import { loadData, saveData, STORAGE_KEYS } from './utils/storage';
 
+const INITIAL_HABITS = [
+  { id: '1', title: '30m Meditation', category: 'perso', streak: 12, completedDates: [new Date().toISOString().split('T')[0]] },
+  { id: '2', title: 'Read 20 Pages', category: 'perso', streak: 8, completedDates: [] },
+  { id: '3', title: 'Morning HIIT', category: 'perso', streak: 24, completedDates: [new Date().toISOString().split('T')[0]] },
+  { id: '4', title: '2L Hydration', category: 'perso', streak: 0, completedDates: [] },
+  { id: '5', title: 'Deep Work', category: 'pro', streak: 15, completedDates: [new Date().toISOString().split('T')[0]] },
+  { id: '6', title: 'Email Zero', category: 'pro', streak: 5, completedDates: [new Date().toISOString().split('T')[0]] },
+  { id: '7', title: 'Plan Tomorrow', category: 'pro', streak: 2, completedDates: [new Date().toISOString().split('T')[0]] },
+];
+
 export default function App() {
-  const [habits, setHabits] = useState(() => loadData(STORAGE_KEYS.HABITS, []));
-  const [journal, setJournal] = useState(() => loadData(STORAGE_KEYS.JOURNAL, []));
-  const [view, setView] = useState('perso'); // 'pro', 'perso', 'journal'
+  // Force loading dummy data for the first view of the new design
+  const [habits, setHabits] = useState(() => {
+    const saved = loadData(STORAGE_KEYS.HABITS, []);
+    // If the data doesn't contain our new streak field or is just 1 item, replace it
+    if (saved.length <= 1 || !saved[0].streak) return INITIAL_HABITS;
+    return saved;
+  });
+  
+  const [view, setView] = useState('perso');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingHabit, setEditingHabit] = useState(null);
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
-  );
-
   useEffect(() => saveData(STORAGE_KEYS.HABITS, habits), [habits]);
-  useEffect(() => saveData(STORAGE_KEYS.JOURNAL, journal), [journal]);
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -54,13 +45,6 @@ export default function App() {
     return habits.filter(h => h.completedDates?.includes(today)).length;
   }, [habits, today]);
 
-  const totalToday = habits.length;
-
-  const surchargeAlert = useMemo(() => {
-    const heavyToday = habits.filter(h => h.mentalLoad === 'chronophage');
-    return heavyToday.length >= 3;
-  }, [habits]);
-
   const handleToggleHabit = (id) => {
     setHabits(prev => prev.map(h => {
       if (h.id !== id) return h;
@@ -70,7 +54,8 @@ export default function App() {
         ...h,
         completedDates: isDone 
           ? completedDates.filter(d => d !== today) 
-          : [...completedDates, today]
+          : [...completedDates, today],
+        streak: isDone ? (h.streak > 0 ? h.streak - 1 : 0) : (h.streak || 0) + 1
       };
     }));
   };
@@ -79,142 +64,55 @@ export default function App() {
     if (data.id) {
       setHabits(prev => prev.map(h => h.id === data.id ? data : h));
     } else {
-      setHabits(prev => [...prev, { ...data, id: Date.now().toString(), completedDates: [] }]);
+      setHabits(prev => [...prev, { ...data, id: Date.now().toString(), streak: 0, completedDates: [] }]);
     }
     setIsFormOpen(false);
     setEditingHabit(null);
   };
 
-  const handleDragEnd = (event) => {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      setHabits((items) => {
-        const oldIndex = items.findIndex((i) => i.id === active.id);
-        const newIndex = items.findIndex((i) => i.id === over.id);
-        return arrayMove(items, oldIndex, newIndex);
-      });
-    }
-  };
-
-  const handleSaveJournal = (entry) => {
-    setJournal(prev => {
-      const existingIdx = prev.findIndex(e => e.date === entry.date);
-      if (existingIdx >= 0) {
-        const updated = [...prev];
-        updated[existingIdx] = entry;
-        return updated;
-      }
-      return [entry, ...prev];
-    });
-  };
-
-  const handleDeleteJournal = (date) => {
-    setJournal(prev => prev.filter(e => e.date !== date));
-  };
-
   return (
-    <div className="min-h-screen pb-20">
+    <div className="min-h-screen relative pb-32">
       <Header 
-        view={view === 'journal' ? 'perso' : view} 
+        view={view} 
         setView={setView}
-        onAddClick={() => { setEditingHabit(null); setIsFormOpen(true); }}
         progressCount={progressCount}
-        totalCount={totalToday}
+        totalCount={habits.length}
       />
 
-      <main className="max-w-md mx-auto px-4 mt-6">
-        {/* Navigation Tabs (Habits vs Journal) */}
-        <div className="flex justify-center mb-8">
-          <div className="glass rounded-2xl flex p-1 shadow-sm border border-white/30">
-            <button 
-              onClick={() => setView(view === 'journal' ? 'perso' : view)}
-              className={`flex items-center gap-2 px-6 py-2 rounded-xl text-xs font-black transition-all ${
-                view !== 'journal' ? 'bg-white shadow-sm text-secondary' : 'text-gray-400'
-              }`}
-            >
-              <CalendarDays size={16} /> Habitudes
-            </button>
-            <button 
-              onClick={() => setView('journal')}
-              className={`flex items-center gap-2 px-6 py-2 rounded-xl text-xs font-black transition-all ${
-                view === 'journal' ? 'bg-white shadow-sm text-secondary' : 'text-gray-400'
-              }`}
-            >
-              <BookOpen size={16} /> Journal
-            </button>
+      <main className="max-w-md mx-auto px-8 mt-4">
+        {activeTab === 'dashboard' ? (
+          <div className="space-y-4">
+            {filteredHabits.map(habit => (
+              <HabitCard 
+                key={habit.id} 
+                habit={habit} 
+                onToggle={handleToggleHabit}
+                onEdit={(h) => { setEditingHabit(h); setIsFormOpen(true); }}
+                isCompletedToday={habit.completedDates?.includes(today)}
+              />
+            ))}
           </div>
-        </div>
-
-        {view === 'journal' ? (
-          <Journal 
-            entries={journal} 
-            onSave={handleSaveJournal} 
-            onDelete={handleDeleteJournal} 
-          />
         ) : (
-          <div className="space-y-8 mt-10">
-            {surchargeAlert && (
-              <div className="glass bg-primary/5 border-primary/20 p-5 rounded-3xl flex gap-4 animate-scale">
-                <div className="p-3 bg-primary/10 rounded-2xl text-primary h-fit shadow-glow">
-                  <AlertTriangle size={24} />
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-sm font-black text-white uppercase tracking-tight">Surcharge détectée</h4>
-                  <p className="text-[11px] text-text-dim font-medium leading-relaxed">Attention, vous avez trop de tâches lourdes aujourd'hui. Priorisez l'essentiel.</p>
-                </div>
-              </div>
-            )}
-
-            {filteredHabits.length === 0 ? (
-              <div className="py-24 text-center space-y-6 animate-fade">
-                <div className="mx-auto w-24 h-24 bg-surface-low rounded-[32px] flex items-center justify-center text-surface-bright border border-white/5">
-                  <Activity size={48} />
-                </div>
-                <div className="space-y-2">
-                  <p className="text-white font-extrabold text-base tracking-tight">C'est le calme plat ici</p>
-                  <p className="text-xs text-text-dim font-medium">Commencez par ajouter votre première habitude.</p>
-                </div>
-                <button 
-                  onClick={() => setIsFormOpen(true)}
-                  className="btn-primary"
-                >
-                  Ajouter une tâche
-                </button>
-              </div>
-            ) : (
-              <DndContext 
-                sensors={sensors}
-                collisionDetection={closestCenter}
-                onDragEnd={handleDragEnd}
-              >
-                <SortableContext 
-                  items={filteredHabits}
-                  strategy={verticalListSortingStrategy}
-                >
-                  <div className="space-y-4 pb-10">
-                    {filteredHabits.map(habit => (
-                      <HabitCard 
-                        key={habit.id} 
-                        habit={habit} 
-                        onToggle={handleToggleHabit}
-                        onEdit={(h) => { setEditingHabit(h); setIsFormOpen(true); }}
-                        isCompletedToday={habit.completedDates?.includes(today)}
-                      />
-                    ))}
-                  </div>
-                </SortableContext>
-              </DndContext>
-            )}
+          <div className="flex flex-col items-center justify-center py-20 text-text-dim italic text-sm">
+            Section {activeTab} en cours...
           </div>
         )}
       </main>
+
+      <button 
+        onClick={() => setIsFormOpen(true)}
+        className="fixed bottom-32 right-8 w-16 h-16 fab-orange rounded-full flex items-center justify-center z-50 animate-scale"
+      >
+        <Plus size={32} strokeWidth={3.5} />
+      </button>
+
+      <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <HabitForm 
         isOpen={isFormOpen}
         onClose={() => setIsFormOpen(false)}
         onSubmit={handleSaveHabit}
         initialData={editingHabit}
-        showSurchargeAlert={surchargeAlert}
       />
     </div>
   );

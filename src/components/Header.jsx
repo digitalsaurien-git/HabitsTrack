@@ -1,100 +1,113 @@
 import React from 'react';
-import { Plus, LayoutGrid, Briefcase, User, Activity } from 'lucide-react';
+import { Bell, Zap } from 'lucide-react';
 
 export default function Header({ 
   view, 
   setView, 
-  onAddClick, 
   progressCount, 
   totalCount 
 }) {
-  const percentage = totalCount > 0 ? (progressCount / totalCount) * 100 : 0;
-  const radius = 36;
+  const percentage = totalCount > 0 ? Math.round((progressCount / totalCount) * 100) : 0;
+  const radius = 85;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <header className="glass sticky top-0 z-50 px-6 py-6 border-b border-white/5 shadow-2xl">
-      <div className="max-w-md mx-auto space-y-8">
-        {/* Top Bar: Logo & Add */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-surface-high flex items-center justify-center border border-white/5 shadow-inner">
-              <Activity className="text-primary" size={22} />
-            </div>
-            <div>
-              <h1 className="text-lg font-extrabold tracking-tight text-white leading-none">HabitsTrack</h1>
-              <p className="label-caps mt-1">Tableau de bord</p>
-            </div>
+    <header className="pt-10 pb-4 space-y-12 animate-fade max-w-md mx-auto">
+      {/* Top Bar */}
+      <div className="flex justify-between items-center px-8">
+        <div className="flex items-center gap-2">
+          <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-glow">
+            <Zap size={22} fill="white" className="text-white" />
           </div>
-          
-          <button 
-            onClick={onAddClick}
-            className="w-12 h-12 bg-primary-gradient text-white rounded-2xl shadow-glow flex items-center justify-center hover:scale-105 active:scale-95"
-          >
-            <Plus size={26} strokeWidth={3} />
+          <h1 className="text-2xl font-black italic tracking-tighter text-white">HabitsTrack</h1>
+        </div>
+        <div className="flex items-center gap-4">
+          <button className="text-text-dim hover:text-white transition-colors p-2 rounded-xl bg-surface-low border border-white/5">
+            <Bell size={20} />
           </button>
+          <div className="w-11 h-11 rounded-full border-2 border-white/10 p-0.5 shadow-luxe">
+            <img 
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop" 
+              alt="Profile" 
+              className="w-full h-full rounded-full object-cover"
+            />
+          </div>
         </div>
+      </div>
 
-        {/* Circular Progress Section */}
-        <div className="flex items-center justify-center py-4">
-          <div className="relative flex items-center justify-center">
-            <svg className="w-40 h-40 transform -rotate-90">
-              {/* Background circle */}
-              <circle
-                cx="80"
-                cy="80"
-                r={radius}
-                stroke="var(--surface-high)"
-                strokeWidth="8"
-                fill="transparent"
-              />
-              {/* Progress circle */}
-              <circle
-                cx="80"
-                cy="80"
-                r={radius}
-                stroke="var(--primary)"
-                strokeWidth="8"
-                fill="transparent"
-                strokeDasharray={circumference}
-                style={{ 
-                  strokeDashoffset,
-                  transition: 'stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                  strokeLinecap: 'round'
-                }}
-              />
-            </svg>
-            <div className="absolute flex flex-col items-center">
-              <span className="text-3xl font-black text-white">{Math.round(percentage)}%</span>
-              <span className="label-caps opacity-50">{progressCount} / {totalCount}</span>
+      {/* Circular Progress Section */}
+      <div className="relative flex flex-col items-center">
+        <div className="relative w-72 h-72 flex items-center justify-center">
+          <svg className="w-full h-full transform -rotate-90 scale-x-[-1]">
+            <circle
+              cx="144"
+              cy="144"
+              r={radius}
+              stroke="rgba(255, 255, 255, 0.04)"
+              strokeWidth="14"
+              fill="transparent"
+            />
+            <circle
+              cx="144"
+              cy="144"
+              r={radius}
+              stroke="url(#orangeGradient)"
+              strokeWidth="14"
+              fill="transparent"
+              strokeDasharray={circumference}
+              style={{ strokeDashoffset: offset }}
+              strokeLinecap="round"
+              className="progress-ring-circle"
+            />
+            <defs>
+              <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff9159" />
+                <stop offset="100%" stopColor="#f66700" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="flex items-baseline">
+              <span className="text-7xl font-black tracking-tighter text-white leading-none">
+                {percentage}
+              </span>
+              <span className="text-2xl font-black text-primary ml-1">%</span>
             </div>
+            <span className="label-caps opacity-40 mt-2 tracking-[0.2em]">Daily Goal</span>
           </div>
         </div>
 
-        {/* Pro/Perso Toggle */}
-        <div className="flex p-1.5 bg-surface-low rounded-[20px] border border-white/5">
+        <div className="mt-6 text-center space-y-2 px-10">
+          <h2 className="text-3xl font-black text-white tracking-tight">Stay Kinetic.</h2>
+          <p className="text-sm text-text-dim font-medium leading-relaxed">
+            You are <span className="text-white font-bold">{totalCount - progressCount} habits</span> away from a perfect day.
+          </p>
+        </div>
+      </div>
+
+      {/* Mode Toggle Tabs */}
+      <div className="px-8 flex">
+        <div className="w-full bg-surface-low rounded-[28px] p-1.5 flex border border-white/5 shadow-inner">
           <button 
             onClick={() => setView('perso')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-[14px] text-xs font-bold transition-all ${
+            className={`flex-1 py-4 rounded-[24px] text-xs font-black transition-all duration-500 uppercase tracking-widest ${
               view === 'perso' 
-              ? 'bg-surface-bright text-white shadow-xl scale-[1.02]' 
+              ? 'bg-surface-bright text-white shadow-[0_10px_20px_rgba(0,0,0,0.4)]' 
               : 'text-text-dim hover:text-white'
             }`}
           >
-            <User size={16} className={view === 'perso' ? 'text-primary' : ''} />
-            <span>Personnel</span>
+            Personal
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-[14px] text-xs font-bold transition-all ${
+            className={`flex-1 py-4 rounded-[24px] text-xs font-black transition-all duration-500 uppercase tracking-widest ${
               view === 'pro' 
-              ? 'bg-surface-bright text-white shadow-xl scale-[1.02]' 
+              ? 'bg-surface-bright text-white shadow-[0_10px_20px_rgba(0,0,0,0.4)]' 
               : 'text-text-dim hover:text-white'
             }`}
           >
-            <Briefcase size={16} className={view === 'pro' ? 'text-primary' : ''} />
-            <span>Professionnel</span>
+            Professional
           </button>
         </div>
       </div>
