@@ -25,104 +25,103 @@ export default function HabitForm({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-4">
+      {/* Sombre Overlay pour faire ressortir la modale */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade"
+        className="absolute inset-0 bg-black/80 backdrop-blur-[12px] animate-fade"
         onClick={onClose}
       />
       
-      <div className="glass-heavy w-full max-w-md rounded-[32px] overflow-hidden border border-white/10 shadow-premium relative animate-scale">
-        <div className="p-8 space-y-8">
-          <div className="flex justify-between items-center">
+      {/* Contenu Opaque et Aéré Anthracite */}
+      <div className="w-full max-w-[380px] bg-[#1a1e23] rounded-[40px] overflow-hidden border border-white/[0.08] shadow-luxe relative animate-kinetic z-10">
+        <div className="p-10 space-y-12">
+          {/* Header de la modale */}
+          <div className="flex justify-between items-center bg-white/[0.02] p-4 rounded-3xl border border-white/[0.03]">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                <Sparkles className="text-primary" size={20} />
+              <div className="w-10 h-10 rounded-2xl bg-primary flex items-center justify-center shadow-glow">
+                <Sparkles className="text-white" size={20} strokeWidth={2.5} />
               </div>
-              <h2 className="text-xl font-extrabold text-white tracking-tight">
+              <h2 className="text-xl font-black text-white tracking-tight uppercase italic scale-y-95">
                 {initialData?.id ? 'Modifier' : 'Nouveau'}
               </h2>
             </div>
             <button 
               onClick={onClose}
-              className="p-2 hover:bg-surface-bright rounded-xl text-surface-bright transition-colors"
+              className="p-3 bg-white/[0.03] hover:bg-white/[0.1] rounded-2xl transition-all border border-white/[0.05]"
             >
-              <X size={20} />
+              <X size={20} className="text-white/40" />
             </button>
           </div>
 
-          {showSurchargeAlert && formData.mentalLoad === 'chronophage' && (
-            <div className="bg-primary/5 border border-primary/20 p-4 rounded-2xl flex gap-3 text-primary animate-pulse">
-              <AlertCircle size={20} />
-              <div className="text-[10px] font-black uppercase tracking-wider leading-tight">
-                Attention : surcharge mentale détectée (3+ tâches lourdes) !
-              </div>
-            </div>
-          )}
-
-          <div className="space-y-6">
-            {/* Title */}
-            <div className="space-y-2">
-              <label className="label-caps opacity-50 px-1">Intitulé</label>
+          <div className="space-y-10">
+            {/* Champ Intitulé - Très aéré */}
+            <div className="space-y-4">
+              <label className="label-caps opacity-40 px-2 tracking-[0.3em]">INTITULÉ DE LA TÂCHE</label>
               <input 
                 type="text" 
                 placeholder="Ex. Méditation matinale..."
-                className="w-full bg-surface-low border border-white/5 rounded-2xl p-4 text-white font-bold placeholder:text-surface-bright focus:outline-none focus:border-primary/30"
+                className="w-full bg-[#121418] border border-white/[0.06] rounded-3xl p-5 text-white font-black text-lg placeholder:text-white/10 focus:outline-none focus:border-primary/40 focus:bg-[#0c0d10] transition-all"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                autoFocus
               />
             </div>
 
-            {/* Category */}
-            <div className="grid grid-cols-2 gap-3">
-              <button 
-                onClick={() => setFormData({ ...formData, category: 'perso' })}
-                className={`py-3.5 rounded-2xl text-xs font-black uppercase tracking-wider border transition-all duration-300 ${
-                  formData.category === 'perso' 
-                  ? 'bg-primary/20 border-primary shadow-glow text-white' 
-                  : 'bg-surface-low border-white/5 text-surface-bright hover:bg-surface-high'
-                }`}
-              >
-                Personnel
-              </button>
-              <button 
-                onClick={() => setFormData({ ...formData, category: 'pro' })}
-                className={`py-3.5 rounded-2xl text-xs font-black uppercase tracking-wider border transition-all duration-300 ${
-                  formData.category === 'pro' 
-                  ? 'bg-primary/20 border-primary shadow-glow text-white' 
-                  : 'bg-surface-low border-white/5 text-surface-bright hover:bg-surface-high'
-                }`}
-              >
-                Professionnel
-              </button>
+            {/* Catégories - Design plus large */}
+            <div className="space-y-4">
+               <label className="label-caps opacity-40 px-2 tracking-[0.3em]">UNIVERS</label>
+               <div className="grid grid-cols-2 gap-4">
+                <button 
+                  onClick={() => setFormData({ ...formData, category: 'perso' })}
+                  className={`py-5 rounded-3xl text-[10px] font-black uppercase tracking-[0.2em] border transition-all duration-500 ${
+                    formData.category === 'perso' 
+                    ? 'bg-white text-black shadow-luxe scale-[1.03] border-white' 
+                    : 'bg-[#121418] border-white/[0.05] text-white/30 hover:border-white/20'
+                  }`}
+                >
+                  Personnel
+                </button>
+                <button 
+                  onClick={() => setFormData({ ...formData, category: 'pro' })}
+                  className={`py-5 rounded-3xl text-[10px] font-black uppercase tracking-[0.2em] border transition-all duration-500 ${
+                    formData.category === 'pro' 
+                    ? 'bg-white text-black shadow-luxe scale-[1.03] border-white' 
+                    : 'bg-[#121418] border-white/[0.05] text-white/30 hover:border-white/20'
+                  }`}
+                >
+                  Professionnel
+                </button>
+              </div>
             </div>
 
-            {/* Mental Load Selection */}
-            <div className="space-y-3">
-              <label className="label-caps opacity-50 px-1">Charge mentale</label>
-              <div className="grid grid-cols-3 gap-2">
+            {/* Charge Mentale - Plus clair */}
+            <div className="space-y-4">
+              <label className="label-caps opacity-40 px-2 tracking-[0.3em]">INTENSITÉ</label>
+              <div className="flex gap-3">
                 {['light', 'medium', 'chronophage'].map(load => (
                   <button 
                     key={load}
                     onClick={() => setFormData({ ...formData, mentalLoad: load })}
-                    className={`py-3 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all duration-300 ${
+                    className={`flex-1 py-4 rounded-2xl text-[9px] font-black uppercase tracking-widest border transition-all duration-500 ${
                       formData.mentalLoad === load 
-                      ? 'bg-surface-high text-white border-primary shadow-glow' 
-                      : 'bg-surface-low text-surface-bright border-white/5'
+                      ? 'bg-primary/20 text-primary border-primary/50 shadow-glow' 
+                      : 'bg-[#121418] text-white/20 border-white/[0.05] hover:border-white/20'
                     }`}
                   >
-                    {load === 'light' ? 'Léger' : load === 'medium' ? 'Moyen' : 'Lourd'}
+                    {load === 'light' ? 'Zen' : load === 'medium' ? 'Focus' : 'Hardcore'}
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
+          {/* Bouton de confirmation géant et stylé */}
           <button 
             onClick={() => onSubmit(formData)}
-            className="w-full btn-primary py-5 rounded-[24px] text-lg shadow-2xl flex items-center justify-center gap-3 active:scale-95 mt-4"
+            className="w-full bg-gradient-to-br from-[#ff9159] to-[#f66700] py-6 rounded-[32px] text-white text-xl font-black shadow-luxe flex items-center justify-center gap-3 active:scale-90 transition-all duration-300"
           >
-            <Check size={24} strokeWidth={3} />
-            Confirmer
+            <Check size={28} strokeWidth={4} />
+            <span className="uppercase tracking-[0.1em] italic">Valider la tâche</span>
           </button>
         </div>
       </div>
