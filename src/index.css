@@ -54,7 +54,7 @@ body {
 
 .premium-card {
   @apply bg-[#1a1e23] border border-white/[0.05] shadow-premium transition-all duration-300;
-  border-radius: theme(--radius-lg);
+  border-radius: var(--radius-lg);
 }
 
 .premium-card:active {
