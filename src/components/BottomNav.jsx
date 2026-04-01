@@ -9,14 +9,14 @@ import {
 export default function BottomNav({ activeTab, setActiveTab }) {
   const tabs = [
     { id: 'dashboard', icon: LayoutGrid, label: 'ACCUEIL' },
-    { id: 'calendar', icon: Calendar, label: 'CAL' },
-    { id: 'progress', icon: BarChart2, label: 'SUIVI' },
-    { id: 'settings', icon: Settings, label: 'PRÉF' },
+    { id: 'calendar', icon: Calendar, label: 'AGENDA' },
+    { id: 'progress', icon: BarChart2, label: 'STATS' },
+    { id: 'settings', icon: Settings, label: 'PROFIL' },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[340px] z-[60] flex justify-center pb-8 pt-4 px-3 bg-gradient-to-t from-black via-black/80 to-transparent">
-      <div className="w-full bg-[#0a0a0a]/98 backdrop-blur-2xl rounded-full p-1.5 flex justify-between items-center border border-white/5 shadow-[0_-10px_25px_rgba(0,0,0,0.5)]">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[340px] z-[60] flex justify-center pb-10 pt-4 px-3 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none">
+      <div className="w-full bg-[#0c0c0c]/90 backdrop-blur-[40px] rounded-[32px] p-2 flex justify-between items-center border border-white/[0.06] shadow-luxe pointer-events-auto">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -25,17 +25,20 @@ export default function BottomNav({ activeTab, setActiveTab }) {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex flex-col items-center gap-1.5 px-3.5 py-2.5 rounded-full transition-all duration-300 ${
-                isActive ? 'text-primary scale-105 bg-white/5' : 'text-text-dim hover:text-white/40'
+              className={`flex flex-col items-center gap-1.5 px-4 py-3 rounded-2xl transition-all duration-500 overflow-hidden relative ${
+                isActive ? 'text-primary scale-[1.05] bg-white/[0.03]' : 'text-text-dim/40 hover:text-white/40'
               }`}
             >
+              {isActive && (
+                <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+              )}
               <Icon 
-                size={18} 
-                strokeWidth={isActive ? 2.5 : 2}
-                className={`transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_8px_rgba(255,107,0,0.4)]' : 'opacity-40'}`}
+                size={20} 
+                strokeWidth={isActive ? 3 : 2}
+                className={`transition-all duration-500 ${isActive ? 'drop-shadow-[0_0_12px_var(--primary-glow)] scale-110' : 'grayscale opacity-50'}`}
               />
-              <span className={`text-[7px] font-black tracking-widest uppercase transition-all duration-300 ${
-                isActive ? 'opacity-100' : 'opacity-0'
+              <span className={`text-[8px] font-black tracking-[0.2em] uppercase transition-all duration-700 ${
+                isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
               }`}>
                 {tab.label}
               </span>

@@ -1,6 +1,4 @@
 import React from 'react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import { 
   Check, 
   Dumbbell, 
@@ -13,50 +11,37 @@ import {
 
 const getIcon = (title) => {
   const t = title.toLowerCase();
-  if (t.includes('méditation') || t.includes('meditation')) return <Flower2 size={24} className="text-secondary" />;
-  if (t.includes('lire') || t.includes('livre') || t.includes('page')) return <Book size={24} className="text-white opacity-60" />;
-  if (t.includes('hiit') || t.includes('sport')) return <Dumbbell size={24} className="text-secondary" />;
-  if (t.includes('hygiène') || t.includes('eau') || t.includes('hydratation')) return <Droplets size={24} className="text-blue-400" />;
-  return <Target size={24} className="text-primary" />;
+  if (t.includes('méditation') || t.includes('meditation')) return <Flower2 size={24} strokeWidth={2.5} className="text-[#4ade80]" />;
+  if (t.includes('lire') || t.includes('livre') || t.includes('page')) return <Book size={24} strokeWidth={2.5} className="text-white opacity-80" />;
+  if (t.includes('hiit') || t.includes('sport')) return <Dumbbell size={24} strokeWidth={2.5} className="text-[#ffb38a]" />;
+  if (t.includes('hygiène') || t.includes('eau') || t.includes('hydratation')) return <Droplets size={24} strokeWidth={2.5} className="text-blue-400" />;
+  return <Target size={24} strokeWidth={2.5} className="text-primary" />;
 };
 
 export default function HabitCard({ habit, onToggle, onEdit, isCompletedToday }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({ id: habit.id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
   const streak = habit.streak || 0;
 
   return (
     <div 
-      ref={setNodeRef} 
-      style={style}
-      className={`premium-card p-6 flex items-center justify-between group animate-fade border-white/5 shadow-2xl transition-all duration-300 ${isCompletedToday ? 'bg-black/40 border-transparent scale-[0.98]' : 'bg-[#0a0a0a]'}`}
+      className={`premium-card p-6 flex items-center justify-between group animate-kinetic transition-all duration-700 ${
+        isCompletedToday 
+        ? 'bg-[#060606] border-white/[0.02] scale-[0.98]' 
+        : 'bg-[#0c0c0c] active:bg-[#111111]'
+      }`}
     >
-      <div 
-        {...attributes} 
-        {...listeners}
-        className="flex items-center gap-5 flex-1 min-w-0"
-      >
-        <div className="w-12 h-12 rounded-[18px] flex-shrink-0 flex items-center justify-center bg-white/5 border border-white/10">
+      <div className="flex items-center gap-5 flex-1 min-w-0">
+        <div className={`icon-circle ${isCompletedToday ? 'opacity-20 grayscale' : 'opacity-100 shadow-glow'}`}>
           {getIcon(habit.title)}
         </div>
         <div className="min-w-0 flex flex-col justify-center gap-1.5">
-          <h3 className={`text-[17px] font-black tracking-tight truncate leading-tight ${isCompletedToday ? 'text-white/20' : 'text-white'}`}>
+          <h3 className={`text-[17px] font-black tracking-tighter truncate leading-none transition-all duration-500 ${
+            isCompletedToday ? 'text-white/20 line-through' : 'text-white'
+          }`}>
             {habit.title}
           </h3>
-          <div className="flex items-center gap-1.5 opacity-30">
-            <Zap size={10} fill={streak > 0 ? "var(--primary)" : "none"} className={streak > 0 ? "text-primary" : "text-text-dim"} />
-            <span className="text-[9px] font-black tracking-[0.2em] uppercase leading-none">
+          <div className="flex items-center gap-1.5 transition-opacity duration-700" style={{ opacity: isCompletedToday ? 0.1 : 0.4 }}>
+            <Zap size={11} fill={streak > 0 ? "var(--primary)" : "none"} className={streak > 0 ? "text-primary" : "text-white"} />
+            <span className="label-caps !text-[10px] tracking-[0.25em]">
               {streak} {streak > 1 ? 'JOURS' : 'JOUR'} DE SUITE
             </span>
           </div>
@@ -65,14 +50,14 @@ export default function HabitCard({ habit, onToggle, onEdit, isCompletedToday })
 
       <button 
         onClick={() => onToggle(habit.id)}
-        aria-label={isCompletedToday ? "Annuler le marquage de l'habitude" : "Marquer l'habitude comme terminée"}
-        className={`w-11 h-11 rounded-full flex items-center justify-center transition-all duration-500 ${
+        aria-label={isCompletedToday ? "Annuler" : "Terminer"}
+        className={`check-btn ${
           isCompletedToday 
-          ? 'bg-secondary text-white shadow-glow scale-105 shadow-[0_0_20px_rgba(34,197,94,0.3)]' 
-          : 'bg-white/5 border border-white/10 hover:border-primary/40 text-transparent'
+          ? 'bg-secondary text-black shadow-[0_0_30px_rgba(74,222,128,0.3)]' 
+          : 'bg-white/[0.03] border border-white/5 text-transparent hover:border-white/20'
         }`}
       >
-        <Check size={26} strokeWidth={4} className={isCompletedToday ? "opacity-100" : "opacity-0"} />
+        <Check size={26} strokeWidth={4} className={isCompletedToday ? "opacity-100 scale-100" : "opacity-0 scale-50"} />
       </button>
     </div>
   );

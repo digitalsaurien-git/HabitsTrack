@@ -1,40 +1,39 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 @theme {
   --color-primary: #ff6b00;
-  --color-secondary: #22c55e;
-  --color-surface: #171a1e;
-  --color-surface-low: #111318;
-  --color-surface-high: #1d2025;
-  --color-surface-bright: #292c32;
-  --color-text-dim: #848995;
+  --color-secondary: #4ade80;
+  --color-surface: #0a0a0a;
+  --color-surface-low: #050505;
+  --color-surface-high: #151515;
+  --color-surface-bright: #222222;
+  --color-text-dim: #6b7280;
   
-  --shadow-glow: 0 0 20px rgba(255, 107, 0, 0.2);
-  --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.4);
-  --shadow-luxe: 0 20px 40px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 20px rgba(255, 107, 0, 0.15);
+  --shadow-premium: 0 25px 50px rgba(0, 0, 0, 0.5);
+  --shadow-luxe: 0 30px 60px rgba(0, 0, 0, 0.9);
   
   --radius-xl: 32px;
-  --radius-lg: 24px;
-  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-md: 18px;
 }
 
 :root {
-  /* Vanilla fallback variables if needed */
   --bg-dark: #000000;
-  --bg-gradient: radial-gradient(circle at top right, #1a1e26 0%, #000000 100%);
+  --bg-gradient: radial-gradient(circle at 50% 0%, #0c0a09 0%, #000000 100%);
   --primary: #ff6b00;
-  --primary-glow: rgba(255, 107, 0, 0.4);
-  --secondary: #22c55e;
-  --text-dim: #848995;
+  --primary-glow: rgba(255, 107, 0, 0.3);
+  --secondary: #4ade80;
+  --text-dim: #6b7280;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 body {
@@ -49,53 +48,58 @@ body {
 
 /* Custom premium classes */
 .glass-nav {
-  @apply bg-[#0d0f13]/95 backdrop-blur-[20px] border-t border-white/5;
+  @apply bg-[#050505]/80 backdrop-blur-[32px] border-t border-white/5;
 }
 
 .premium-card {
-  @apply bg-gradient-to-br from-[#1d2025] to-[#171a1e] border border-white/5 shadow-premium transition-all duration-300;
+  @apply bg-[#0c0c0c] border border-white/[0.04] shadow-premium transition-all duration-300;
   border-radius: theme(--radius-lg);
 }
 
 .premium-card:active {
-  @apply scale-[0.98] bg-[#23262c];
+  @apply scale-[0.97] bg-[#111111] border-white/10;
 }
 
 .label-caps {
-  @apply text-[10px] font-extrabold uppercase tracking-[0.15em] text-text-dim;
+  @apply text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#555] leading-none;
 }
 
 .text-gradient {
-  @apply bg-gradient-to-br from-[#ff9159] to-[#f66700] bg-clip-text text-transparent;
+  @apply bg-gradient-to-br from-white to-white/40 bg-clip-text text-transparent;
 }
 
 .fab-orange {
-  @apply bg-gradient-to-br from-[#ff9159] to-[#f66700] shadow-[0_10px_25px_var(--primary-glow)] text-white transition-all duration-300;
+  @apply bg-gradient-to-br from-[#ff9159] to-[#f66700] shadow-[0_15px_30px_var(--primary-glow)] text-white transition-all duration-500;
 }
 
 .fab-orange:active {
-  @apply scale-[0.9] -rotate-12;
+  @apply scale-90 -rotate-12 shadow-none;
 }
 
 .icon-circle {
-  @apply w-11 h-11 rounded-[14px] flex items-center justify-center bg-white/5 border border-white/10;
+  @apply w-12 h-12 rounded-2xl flex items-center justify-center bg-white/[0.03] border border-white/[0.07] transition-all duration-300;
 }
 
 .check-btn {
-  @apply w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500;
+  @apply w-12 h-12 rounded-[20px] flex items-center justify-center transition-all duration-700;
 }
 
 .progress-ring-circle {
-  @apply transition-all duration-1000;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.4s ease;
   stroke: var(--primary);
-  filter: drop-shadow(0 0 8px var(--primary-glow));
+  filter: drop-shadow(0 0 12px var(--primary-glow));
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
-.animate-fade {
-  animation: fadeIn 0.4s ease-out forwards;
+.animate-kinetic {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom scrollbar for mobile feel */
+::-webkit-scrollbar {
+  width: 0px;
 }
