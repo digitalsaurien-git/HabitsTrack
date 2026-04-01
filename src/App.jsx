@@ -89,7 +89,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#050505] flex flex-col items-center">
       {/* Absolute ultra-narrow format (340px) centered */}
-      <div className="w-full max-w-[340px] min-h-screen relative pb-44 px-3">
+      <div className="w-full max-w-[340px] min-h-screen relative pb-32 px-3">
         <Header 
           view={view} 
           setView={setView}
@@ -140,7 +140,7 @@ export default function App() {
 
         <button 
           onClick={() => setIsFormOpen(true)}
-          className="fixed bottom-36 left-1/2 -translate-x-1/2 ml-28 w-14 h-14 fab-orange rounded-2xl flex items-center justify-center z-50 shadow-2xl active:scale-95 transition-all border border-white/5"
+          className="fixed bottom-28 left-1/2 -translate-x-1/2 ml-28 w-14 h-14 fab-orange rounded-2xl flex items-center justify-center z-50 shadow-2xl active:scale-90 transition-all border border-white/10"
         >
           <Plus size={28} strokeWidth={3.5} />
         </button>

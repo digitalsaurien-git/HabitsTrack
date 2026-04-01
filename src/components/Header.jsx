@@ -86,7 +86,7 @@ export default function Header({
       </div>
 
       {/* Toggle Tabs */}
-      <div className="px-2 mt-10 mb-4">
+      <div className="px-2 mt-10 mb-9 transition-all duration-700">
         <div className="bg-[#0c0c0c] rounded-[24px] p-1 flex border border-white/5 shadow-premium">
           <button 
             onClick={() => setView('perso')}
