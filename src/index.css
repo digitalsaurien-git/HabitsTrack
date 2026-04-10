@@ -2,31 +2,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #3b82f6;
-  --color-secondary: #6366f1;
-  --color-accent: #f43f5e;
-  --color-surface: #ffffff;
-  --color-surface-soft: #f8fafc;
-  --color-surface-muted: #f1f5f9;
-  --color-text-main: #0f172a;
-  --color-text-muted: #64748b;
+  /* Harmonized Steel Palette */
+  --color-primary: #4f46e5; /* Indigo 600 */
+  --color-primary-dark: #3730a3;
+  --color-surface: #f8fafc; /* Slate 50 */
+  --color-surface-elevated: #ffffff;
+  --color-border-subtle: #e2e8f0; /* Slate 200 */
+  --color-text-main: #1e293b; /* Slate 800 */
+  --color-text-muted: #64748b; /* Slate 500 */
   
-  --shadow-premium: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
-  --shadow-soft: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
-  --shadow-glow: 0 0 15px rgba(59, 130, 246, 0.3);
+  --shadow-harmonized: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+  --shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
   
-  --radius-xl: 32px;
-  --radius-lg: 24px;
-  --radius-md: 16px;
+  --radius-harmonized: 20px;
 
-  --animate-in: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-soft: fadeIn 0.5s ease-out forwards;
 }
 
 :root {
-  --bg-main: #fcfdfe;
-  --primary: #3b82f6;
-  --glass: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.04);
+  --bg-app: #f1f5f9; /* Slate 100 - Less bright than white */
+  --primary: #4f46e5;
+  --text-main: #1e293b;
 }
 
 * {
@@ -38,71 +34,56 @@
 }
 
 body {
-  background-color: var(--bg-main);
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.03) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.03) 0px, transparent 50%);
-  color: #0f172a;
+  background-color: var(--bg-app);
+  color: var(--text-main);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, .font-heading {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
-/* Redesigned Pristine Light Classes */
+/* Redesigned Harmonized Classes */
 
-.glass-card {
-  @apply bg-white border border-black/[0.04] shadow-soft transition-all duration-300;
+.premium-card {
+  @apply bg-white border border-[#e2e8f0] shadow-harmonized transition-all duration-300;
+  border-radius: var(--radius-harmonized);
 }
 
-.premium-card-elevated {
-  @apply bg-white border border-black/[0.02] shadow-premium transition-all duration-300;
+.premium-card-active {
+  @apply bg-[#f8fafc] border-[#4f46e5]/20 shadow-none;
 }
 
 .label-caps {
-  @apply text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400;
+  @apply text-[11px] font-bold uppercase tracking-[0.1em] text-slate-500/80;
 }
 
-.text-gradient-primary {
-  @apply bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent;
+.btn-indigo {
+  @apply bg-[#4f46e5] hover:bg-[#4338ca] h-12 rounded-xl flex items-center justify-center font-bold text-white shadow-indigo-200 shadow-lg active:scale-95 transition-all;
 }
 
-.btn-primary {
-  @apply bg-blue-600 hover:bg-blue-700 h-14 rounded-2xl flex items-center justify-center font-bold text-white shadow-blue-500/20 shadow-xl active:scale-95 transition-all;
+.icon-box {
+  @apply w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-[#4f46e5] border border-slate-100;
 }
 
-.btn-ghost {
-  @apply bg-slate-50 hover:bg-slate-100 border border-slate-200/50 h-14 rounded-2xl flex items-center justify-center font-semibold text-slate-600 transition-all active:scale-95;
+/* Gauge customization - Harmonized Indigo */
+.gauge-bg {
+  @apply stroke-slate-200;
 }
 
-/* Gauge customization - Pristine Light */
-.gauge-background {
-  @apply stroke-slate-100;
-}
-
-.gauge-progress {
-  @apply stroke-blue-500 transition-all duration-1000 ease-out;
+.gauge-fill {
+  @apply stroke-[#4f46e5] transition-all duration-1000 ease-out;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.2));
 }
 
-.nav-item {
-  @apply flex flex-col items-center gap-1 transition-all duration-300;
+.floating-island {
+  @apply fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-[340px] h-16 bg-white border border-slate-200 shadow-elevated rounded-2xl z-[100] flex items-center justify-around px-4;
 }
 
-.nav-item.active {
-  @apply text-blue-600 scale-110;
-}
-
-.nav-item:not(.active) {
-  @apply text-slate-300;
-}
-
-@keyframes slideUpFade {
-  from { opacity: 0; transform: translateY(15px); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 

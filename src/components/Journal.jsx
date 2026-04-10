@@ -22,53 +22,53 @@ export default function Journal({ entries = [], onSave, onDelete }) {
   });
 
   const moods = [
-    { id: 'good', icon: <Smile size={24} />, label: 'Optimal', color: 'text-emerald-500', bg: 'bg-emerald-50' },
-    { id: 'meh', icon: <Meh size={24} />, label: 'Stable', color: 'text-blue-500', bg: 'bg-blue-50' },
-    { id: 'bad', icon: <Frown size={24} />, label: 'Critique', color: 'text-rose-500', bg: 'bg-rose-50' }
+    { id: 'good', icon: <Smile size={24} />, label: 'Super' },
+    { id: 'meh', icon: <Meh size={24} />, label: 'Bof' },
+    { id: 'bad', icon: <Frown size={24} />, label: 'Pas top' }
   ];
 
   return (
-    <div className="max-w-md mx-auto space-y-12 animate-in pb-24 mt-4 px-1">
-      <div className="bg-white rounded-[40px] p-8 space-y-10 shadow-soft border border-slate-100">
+    <div className="max-w-md mx-auto space-y-8 pb-24 mt-4">
+      <div className="bg-white rounded-2xl p-6 space-y-8 border border-slate-200 shadow-sm">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center">
-            <Calendar className="text-blue-600" size={22} />
+          <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white">
+            <Calendar size={20} />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-slate-800 tracking-tight">Rapport d'État</h2>
-            <p className="label-caps !text-[9px] mt-1 text-blue-500">SYNCHRONISATION QUOTIDIENNE</p>
+            <h2 className="text-lg font-bold text-slate-800">Journal d'état</h2>
+            <p className="label-caps !text-[9px] text-indigo-600 font-bold">Synchronisation</p>
           </div>
         </div>
         
         {/* Mood Selection */}
-        <div className="space-y-4">
-          <label className="label-caps px-1">Résonance Émotionnelle</label>
-          <div className="grid grid-cols-3 gap-3">
+        <div className="space-y-3">
+          <label className="label-caps">Humeur générale</label>
+          <div className="grid grid-cols-3 gap-2">
             {moods.map(m => (
               <button 
                 key={m.id}
                 onClick={() => setEntry({ ...entry, mood: m.id })}
-                className={`flex flex-col items-center gap-3 p-5 rounded-3xl border transition-all duration-300 ${
+                className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
                   entry.mood === m.id 
-                  ? `${m.color} ${m.bg} border-transparent shadow-sm scale-[1.05]` 
-                  : 'text-slate-300 bg-slate-50 border-slate-100 hover:border-slate-300'
+                  ? 'bg-indigo-50 border-indigo-200 text-indigo-600 scale-[1.02]' 
+                  : 'text-slate-400 bg-slate-50 border-slate-100 hover:border-slate-200'
                 }`}
               >
                 {m.icon}
-                <span className="text-[9px] font-bold uppercase tracking-widest">{m.label}</span>
+                <span className="text-[10px] font-bold uppercase">{m.label}</span>
               </button>
             ))}
           </div>
         </div>
 
         {/* Symptoms & Stress */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2">
           <button 
             onClick={() => setEntry({ ...entry, migraine: !entry.migraine })}
-            className={`flex items-center gap-3 p-5 rounded-2xl border transition-all duration-300 ${
+            className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${
               entry.migraine 
-              ? 'bg-rose-50 border-rose-200 text-rose-500 shadow-sm' 
-              : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-300'
+              ? 'bg-rose-50 border-rose-100 text-rose-600' 
+              : 'bg-slate-50 border-slate-100 text-slate-500 hover:border-slate-200'
             }`}
           >
             <Brain size={18} />
@@ -79,21 +79,21 @@ export default function Journal({ entries = [], onSave, onDelete }) {
             <select 
               value={entry.stress}
               onChange={(e) => setEntry({ ...entry, stress: e.target.value })}
-              className="w-full h-full bg-slate-50 border border-slate-100 rounded-2xl p-4 text-xs font-bold text-slate-500 focus:outline-none focus:border-blue-300 appearance-none cursor-pointer"
+              className="w-full h-full bg-slate-50 border border-slate-100 rounded-xl p-3 text-xs font-bold text-slate-600 focus:outline-none focus:border-indigo-300 appearance-none cursor-pointer"
             >
               <option value="none">Stress : Nul</option>
               <option value="low">Stress : Bas</option>
-              <option value="high">Stress : Élevé</option>
+              <option value="high">Stress : Haut</option>
             </select>
           </div>
         </div>
 
         {/* Notes */}
-        <div className="space-y-4">
-          <label className="label-caps px-1">Notes de Session</label>
+        <div className="space-y-3">
+          <label className="label-caps">Observations</label>
           <textarea 
-            placeholder="Journaliser les événements..."
-            className="w-full bg-slate-50 border border-slate-100 rounded-3xl p-5 text-sm text-slate-700 focus:outline-none focus:border-blue-400 focus:bg-white min-h-[140px] resize-none placeholder:text-slate-300 transition-all shadow-inner"
+            placeholder="Écrivez vos pensées ici..."
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 min-h-[120px] resize-none placeholder:text-slate-300 transition-all font-medium"
             value={entry.notes}
             onChange={(e) => setEntry({ ...entry, notes: e.target.value })}
           />
@@ -101,45 +101,44 @@ export default function Journal({ entries = [], onSave, onDelete }) {
 
         <button 
           onClick={() => onSave(entry)}
-          className="w-full h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold flex items-center justify-center gap-3 shadow-[0_15px_40px_rgba(37,99,235,0.3)] active:scale-95 transition-all"
+          className="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
         >
-          <Save size={20} strokeWidth={3} />
-          <span className="uppercase tracking-widest text-xs">Sauvegarder le Rapport</span>
+          <Save size={18} />
+          <span>Enregistrer ma journée</span>
         </button>
       </div>
 
       {/* History */}
-      <div className="space-y-6 px-1">
-        <h3 className="label-caps flex items-center gap-2">
-          <History size={14} className="text-blue-600" /> Archives de Bord
+      <div className="space-y-4">
+        <h3 className="label-caps flex items-center gap-2 px-1">
+          <History size={14} className="text-indigo-600" /> Historique récent
         </h3>
-        <div className="space-y-3">
+        <div className="space-y-2">
           {entries.length === 0 ? (
-            <div className="bg-slate-50 p-12 text-center rounded-[32px] border border-dashed border-slate-200">
-              <Sparkles size={32} className="mx-auto mb-4 text-slate-200" />
-              <p className="text-xs font-medium italic text-slate-400">Aucune archive disponible</p>
+            <div className="bg-slate-200/30 p-10 text-center rounded-xl border border-dashed border-slate-300">
+              <p className="text-xs font-medium italic text-slate-400">Aucun historique disponible</p>
             </div>
           ) : (
             entries.slice(0, 5).map(e => (
-              <div key={e.date} className="bg-white p-4 flex justify-between items-center group hover:bg-slate-50 rounded-3xl border border-slate-100 transition-all shadow-sm">
-                <div className="flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center border border-slate-100 ${
-                    e.mood === 'good' ? 'text-emerald-500' : e.mood === 'meh' ? 'text-blue-500' : 'text-rose-500'
+              <div key={e.date} className="bg-white p-3 flex justify-between items-center group hover:bg-slate-50 rounded-xl border border-slate-200 transition-all">
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center ${
+                    e.mood === 'good' ? 'text-indigo-600' : e.mood === 'meh' ? 'text-slate-500' : 'text-rose-500'
                   }`}>
                     {moods.find(m => m.id === e.mood)?.icon || moods[0].icon}
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-[14px] font-bold text-slate-800 truncate capitalize">
+                    <h4 className="text-[14px] font-bold text-slate-800 capitalize">
                       {new Date(e.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'short' })}
                     </h4>
-                    <p className="text-[9px] font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                    <p className="text-[9px] font-bold text-slate-400 uppercase">
                       {e.stress !== 'none' ? `Stress ${e.stress}` : 'Calme'}{e.migraine ? ' • Migraine' : ''}
                     </p>
                   </div>
                 </div>
                 <button 
                   onClick={() => onDelete(e.date)}
-                  className="w-10 h-10 flex items-center justify-center text-slate-200 hover:text-rose-500 hover:bg-rose-50 rounded-xl transition-all"
+                  className="w-9 h-9 flex items-center justify-center text-slate-300 hover:text-rose-500 transition-all"
                 >
                   <Trash2 size={16} />
                 </button>

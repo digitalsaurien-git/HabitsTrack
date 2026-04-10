@@ -1,22 +1,22 @@
-# Project Requirements Document (PRD) - HabitsTrack "Pristine Light"
+# Project Requirements Document (PRD) - HabitsTrack "Harmonized Steel"
 
 ## 1. Overview
-HabitsTrack is a high-end, premium habit tracking application. The current edition features a "Pristine Light" user interface, emphasizing clarity, focus, and a clean aesthetic inspired by leading edge productivity tools.
+HabitsTrack is a sophisticated habit tracking application. The current edition features a "Harmonized Steel & Indigo" user interface, specifically engineered for maximum visual comfort and tonal consistency.
 
 ## 2. Target Audience
-- Professionals seeking a clean, undistracted environment.
-- Users who prefer light, airy interfaces with high legibility.
-- Individuals optimizing their daily routines.
+- Users who value long-term visual comfort and balanced aesthetics.
+- Professionals looking for a reliable, well-organized daily tool.
+- Individuals who prefer a clean, consistent design language.
 
 ## 3. Core Features Developed
-- **Pristine Light UI**: A high-clarity white interface with Vibrant Blue and Indigo accents.
-- **Glassmorphism (Frosted)**: Subtle use of frosted glass effects for depth without clutter.
-- **Dual-Flow Management**: Specialized views for Personal and Professional missions.
-- **High-Contrast Dashboard**: A refined circular progress gauge with crisp typography.
-- **Minimalist Habit Cards**: Cards with soft elevation and clear status indicators.
-- **Daily Journaling (Pristine Sync)**: Simplified logging of mood, stress, and fatigue.
-- **Kinetic Navigation**: A clean floating dock for seamless context switching.
-- **Privacy First**: Fully local data persistence via LocalStorage.
+- **Harmonized Steel UI**: A soft slate-gray background (#F1F5F9) to prevent eye strain, paired with an elegant Indigo color system.
+- **Tonal Consistency**: All icons, buttons, and status indicators are harmonized around the Indigo palette for a cohesive look.
+- **Refined Geometry**: Unified border radiuses and shadows across all components (Cards, Modals, Docks).
+- **Steel-Indigo Dashboard**: A monochromatic circular progress gauge with high legibility and soft transitions.
+- **Structured Activity List**: Simplified habit cards with clear, consistent iconography.
+- **Synchronized Journaling**: A balanced interface for mood and stress logging with indigo highlights.
+- **Dark Dock Navigation**: A high-contrast dark indigo dock for intuitive navigation.
+- **Local Resilience**: Secure data persistence managed via LocalStorage.
 
 ## 4. Design Guidelines
 - **Typography**: 'Plus Jakarta Sans' for headings and technical data; 'Inter' for body text.

@@ -1,28 +1,28 @@
-# HabitsTrack: Pristine Light Edition ❄️
+# HabitsTrack: Harmonized Steel Edition 🛡️
 
-Une application de suivi d'habitudes **High-End**, conçue pour la clarté, le focus et une productivité sans compromis.
+Une application de suivi d'habitudes **Équilibrée**, conçue pour la longévité visuelle, le confort et l'harmonie des tons.
 
 ## 🚀 Liens de l'application
 - **Production (Vercel)** : [https://my-habits-track.vercel.app/](https://my-habits-track.vercel.app/)
 - **GitHub Pages** : [https://digitalsaurien-git.github.io/HabitsTrack/](https://digitalsaurien-git.github.io/HabitsTrack/)
 
-## 🎨 Design System "Pristine Light"
-- **Esthétique Épurée** : Interface blanche immaculée (#FDFEFE), ombres douces et typographie haute visibilité.
-- **Minimalisme Scandinave** : Utilisation de flous "frosted glass" et d'espaces généreux pour réduire la fatigue cognitive.
-- **Accents Royaux** : Palette Bleu Vibrant (#3b82f6) et Indigo pour une navigation intuitive.
+## 🎨 Design System "Harmonized Steel"
+- **Confort Visuel** : Fond Slate-100 (#F1F5F9) réduisant l'éblouissement tout en restant moderne et professionnel.
+- **Unite Chromatique** : Tous les éléments visuels sont accordés autour d'un système de couleurs Indigo Indigo-600.
+- **Géométrie Cohérente** : Des arrondis de 20px et des ombrages subtils partagés par tous les composants.
 
-## 🛠️ Fonctionnalités Clefs
-- **Dashboard Dual-Mission** : Filtres rapides pour séparer vie perso et pro.
-- **Pristine Sync Journal** : Interface simplifiée pour loguer votre état physique et mental.
-- **Objectifs Kinetic** : Système d'ajout d'habitudes fluide et ergonomique.
-- **Zéro Distraction** : Une UI qui s'efface pour laisser place à vos objectifs.
-- **Sécurité Totale** : Stockage 100% local, aucune donnée n'est partagée.
+## 🛠️ Caractéristiques
+- **Interface Tonalisée** : Des cartes et des boutons parfaitement accordés pour une sensation de calme et d'ordre.
+- **Pulse Dashboard** : Suivi de progression indigo, offrant une lecture rapide et sans distraction.
+- **Journal Synchronisé** : Saisie d'humeur et de symptômes dans un environnement visuel unifié.
+- **Navigation Dock Dark** : Un dock Indigo profond pour une accessibilité rapide.
+- **Sécurité & Localité** : Vos données restent sur votre appareil (LocalStorage).
 
 ## ⚙️ Stack Technique
 - **Core** : React 19 (Vite)
-- **Style** : Tailwind CSS v4 + Design System "Pristine"
+- **Style** : Tailwind CSS v4 + Design "Harmonized"
 - **Icônes** : Lucide React
-- **Persistence** : LocalStorage
+- **Persistence** : LocalStorage API
 
 ---
-*Conçu pour la clarté d'esprit et la réussite quotidienne.*
+*L'harmonie au service de vos objectifs quotidiens.*
