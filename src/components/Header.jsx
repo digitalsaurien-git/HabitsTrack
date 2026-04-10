@@ -78,8 +78,9 @@ export default function Header({
           </div>
         </div>
         
-        {/* Spacer for undeniable interligne */}
-        <div className="h-20" />
+        {/* Spacer for a single interligne */}
+        {/* Spacer for a single interligne */}
+        <div className="h-8" />
       </div>
 
       {/* Styled Tabs */}
