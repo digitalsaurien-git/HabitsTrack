@@ -1,29 +1,28 @@
-# HabitsTrack 🌿
+# HabitsTrack: Midnight Obsidian Edition 🌌
 
-Une application moderne et élégante pour le suivi des habitudes quotidiennes, avec gestion de la charge mentale.
+Une application de suivi d'habitudes **Prestige**, conçue pour la performance et le bien-être visuel. Inspirée par l'esthétique futuriste et cinétique.
 
 ## 🚀 Liens de l'application
 - **Production (Vercel)** : [https://my-habits-track.vercel.app/](https://my-habits-track.vercel.app/)
 - **GitHub Pages** : [https://digitalsaurien-git.github.io/HabitsTrack/](https://digitalsaurien-git.github.io/HabitsTrack/)
 
-## 🎨 Caractéristiques
-- **Glassmorphism UI** : Interface premium et immersive.
-- **Gestion Double-Flux** : Séparez facilement vos habitudes Personnelles et Professionnelles.
-- **Journal de Bord** : Suivez votre humeur, vos symptômes et votre fatigue au quotidien.
-- **Alerte Surcharge** : Système intelligent pour vous prévenir si votre journée est trop chargée en tâches chronophages.
-- **Zéro Inscription** : Pas de compte nécessaire, vos données restent locales et sécurisées sur votre appareil.
+## 🎨 Design System "Midnight Obsidian"
+- **Esthétique Premium** : Glassmorphisme profond, flous de 40px et finitions ultra-fines.
+- **Pulse Center** : Jauge de progression centrale inspirée des cockpits futuristes.
+- **Accents Néons** : Palette Cyber Cyan (#00f2ff) et Electric Violet pour une expérience immersive.
 
-## 🛠️ Stack Technique
-- **Framework** : React (Vite)
-- **Styling** : Vanilla CSS
-- **État & Stockage** : React State + LocalStorage
+## 🛠️ Fonctionnalités Développées
+- **Gestion Double-Flux** : Dashboard séparé pour Personnel et Professionnel.
+- **Cyber Sync Journal** : Suivi rigoureux de l'humeur, du stress et de la fatigue.
+- **Configurateur de Mission** : Ajout d'habitudes avec niveaux d'intensité (Zen, Focus, Hardcore).
+- **Zéro Latence** : Application ultra-réactive avec animations cinétiques fluides.
+- **Privacy First** : Stockage local uniquement, aucune donnée ne quitte votre appareil.
+
+## ⚙️ Stack Technique
+- **Core** : React 19 (Vite)
+- **Style** : Tailwind CSS v4 + Custom Modern CSS
 - **Icônes** : Lucide React
-- **Drag & Drop** : dnd-kit
-
-## 📦 Installation Locale
-1. Clonez le dépôt : `git clone https://github.com/digitalsaurien-git/HabitsTrack.git`
-2. Installez les dépendances : `npm install`
-3. Lancez en mode développement : `npm run dev`
+- **Persistence** : LocalStorage API
 
 ---
-*Développé avec ❤️ pour une meilleure santé mentale au quotidien.*
+*Façonné avec précision pour ceux qui exigent l'excellence.*
