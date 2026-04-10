@@ -1,23 +1,22 @@
-# Project Requirements Document (PRD) - HabitsTrack "Prestige"
+# Project Requirements Document (PRD) - HabitsTrack "Pristine Light"
 
 ## 1. Overview
-HabitsTrack is a high-end, premium habit tracking application designed for users who value aesthetics and mental well-being. It features a "Midnight Obsidian" user interface with glassmorphism and kinetic animations.
+HabitsTrack is a high-end, premium habit tracking application. The current edition features a "Pristine Light" user interface, emphasizing clarity, focus, and a clean aesthetic inspired by leading edge productivity tools.
 
 ## 2. Target Audience
-- High-performers and "Cyber" enthusiasts.
-- Users looking for a sleek, non-intrusive way to track daily habits.
-- Individuals managing mental load and fatigue.
+- Professionals seeking a clean, undistracted environment.
+- Users who prefer light, airy interfaces with high legibility.
+- Individuals optimizing their daily routines.
 
 ## 3. Core Features Developed
-- **Midnight Obsidian UI**: A premium dark-themed interface with Cyber Cyan and Electric Violet highlights.
-- **Glassmorphism Design**: High-blur surfaces and semi-transparent layers for a futuristic feel.
-- **Dual-Flow Management**: Separation of Personal and Professional habits.
-- **Pulse Center Dashboard**: A circular progress gauge tracking daily completion percentages with dynamic glow effects.
-- **Interactive Habit Cards**: Quick toggle for habit completion with visual feedback (striking through, opacity change, and glowing indicators).
-- **Daily Journaling (Cyber Sync)**: Tracking mood, fatigue, stress levels, and migraine symptoms with historical archives.
-- **Configurateur de Mission**: A modal interface for adding and editing habits with "Intensity" selection (Zen, Focus, Hardcore).
-- **Floating Dock Navigation**: A bottom navigation island for quick switching between Dashboard, Journal, Stats, and Profile.
-- **Local Persistence**: All data is stored securely in LocalStorage.
+- **Pristine Light UI**: A high-clarity white interface with Vibrant Blue and Indigo accents.
+- **Glassmorphism (Frosted)**: Subtle use of frosted glass effects for depth without clutter.
+- **Dual-Flow Management**: Specialized views for Personal and Professional missions.
+- **High-Contrast Dashboard**: A refined circular progress gauge with crisp typography.
+- **Minimalist Habit Cards**: Cards with soft elevation and clear status indicators.
+- **Daily Journaling (Pristine Sync)**: Simplified logging of mood, stress, and fatigue.
+- **Kinetic Navigation**: A clean floating dock for seamless context switching.
+- **Privacy First**: Fully local data persistence via LocalStorage.
 
 ## 4. Design Guidelines
 - **Typography**: 'Plus Jakarta Sans' for headings and technical data; 'Inter' for body text.

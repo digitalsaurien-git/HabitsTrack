@@ -1,28 +1,28 @@
-# HabitsTrack: Midnight Obsidian Edition 🌌
+# HabitsTrack: Pristine Light Edition ❄️
 
-Une application de suivi d'habitudes **Prestige**, conçue pour la performance et le bien-être visuel. Inspirée par l'esthétique futuriste et cinétique.
+Une application de suivi d'habitudes **High-End**, conçue pour la clarté, le focus et une productivité sans compromis.
 
 ## 🚀 Liens de l'application
 - **Production (Vercel)** : [https://my-habits-track.vercel.app/](https://my-habits-track.vercel.app/)
 - **GitHub Pages** : [https://digitalsaurien-git.github.io/HabitsTrack/](https://digitalsaurien-git.github.io/HabitsTrack/)
 
-## 🎨 Design System "Midnight Obsidian"
-- **Esthétique Premium** : Glassmorphisme profond, flous de 40px et finitions ultra-fines.
-- **Pulse Center** : Jauge de progression centrale inspirée des cockpits futuristes.
-- **Accents Néons** : Palette Cyber Cyan (#00f2ff) et Electric Violet pour une expérience immersive.
+## 🎨 Design System "Pristine Light"
+- **Esthétique Épurée** : Interface blanche immaculée (#FDFEFE), ombres douces et typographie haute visibilité.
+- **Minimalisme Scandinave** : Utilisation de flous "frosted glass" et d'espaces généreux pour réduire la fatigue cognitive.
+- **Accents Royaux** : Palette Bleu Vibrant (#3b82f6) et Indigo pour une navigation intuitive.
 
-## 🛠️ Fonctionnalités Développées
-- **Gestion Double-Flux** : Dashboard séparé pour Personnel et Professionnel.
-- **Cyber Sync Journal** : Suivi rigoureux de l'humeur, du stress et de la fatigue.
-- **Configurateur de Mission** : Ajout d'habitudes avec niveaux d'intensité (Zen, Focus, Hardcore).
-- **Zéro Latence** : Application ultra-réactive avec animations cinétiques fluides.
-- **Privacy First** : Stockage local uniquement, aucune donnée ne quitte votre appareil.
+## 🛠️ Fonctionnalités Clefs
+- **Dashboard Dual-Mission** : Filtres rapides pour séparer vie perso et pro.
+- **Pristine Sync Journal** : Interface simplifiée pour loguer votre état physique et mental.
+- **Objectifs Kinetic** : Système d'ajout d'habitudes fluide et ergonomique.
+- **Zéro Distraction** : Une UI qui s'efface pour laisser place à vos objectifs.
+- **Sécurité Totale** : Stockage 100% local, aucune donnée n'est partagée.
 
 ## ⚙️ Stack Technique
 - **Core** : React 19 (Vite)
-- **Style** : Tailwind CSS v4 + Custom Modern CSS
+- **Style** : Tailwind CSS v4 + Design System "Pristine"
 - **Icônes** : Lucide React
-- **Persistence** : LocalStorage API
+- **Persistence** : LocalStorage
 
 ---
-*Façonné avec précision pour ceux qui exigent l'excellence.*
+*Conçu pour la clarté d'esprit et la réussite quotidienne.*

@@ -22,32 +22,32 @@ export default function HabitForm({
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-5">
-      {/* Dynamic Overlay */}
+      {/* Light Overlay */}
       <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-[20px] transition-all duration-700"
+        className="absolute inset-0 bg-slate-900/10 backdrop-blur-md transition-all duration-500"
         onClick={onClose}
       />
       
-      {/* Futuristic Modal Container */}
-      <div className="w-full max-w-[360px] glass-card rounded-[40px] overflow-hidden relative z-10 animate-in p-1">
-        <div className="bg-[#0a0a0b] rounded-[38px] p-8 space-y-10">
+      {/* Pristine Modal Container */}
+      <div className="w-full max-w-[370px] bg-white rounded-[40px] overflow-hidden relative z-10 animate-in shadow-[0_30px_100px_rgba(0,0,0,0.15)] border border-slate-100">
+        <div className="p-8 space-y-10">
           
           {/* Header */}
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#00f2ff]/10 border border-[#00f2ff]/20 flex items-center justify-center">
-                <Sparkles className="text-[#00f2ff]" size={18} />
+              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+                <Sparkles className="text-blue-600" size={18} />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-white tracking-tight">
-                  {initialData?.id ? 'Édition Pulse' : 'Nouvelle Mission'}
+                <h2 className="text-lg font-bold text-slate-800 tracking-tight">
+                  {initialData?.id ? 'Édition' : 'Nouvel Objectif'}
                 </h2>
-                <p className="text-[9px] font-bold text-white/20 uppercase tracking-[0.2em]">Configurateur de vie</p>
+                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Planificateur Kinetic</p>
               </div>
             </div>
             <button 
               onClick={onClose}
-              className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-xl text-white/20 hover:text-white transition-all"
+              className="w-10 h-10 flex items-center justify-center bg-slate-50 rounded-xl text-slate-400 hover:text-slate-600 transition-all border border-slate-100"
             >
               <X size={18} />
             </button>
@@ -56,11 +56,11 @@ export default function HabitForm({
           <div className="space-y-8">
             {/* Input Section */}
             <div className="space-y-3">
-              <label className="label-caps px-1">Intitulé de la mission</label>
+              <label className="label-caps px-1">Intitulé de l'habitude</label>
               <input 
                 type="text" 
-                placeholder="Ex. Séance de HIIT..."
-                className="w-full bg-white/[0.03] border border-white/[0.08] rounded-2xl p-4 text-white font-semibold text-base placeholder:text-white/10 focus:outline-none focus:border-[#00f2ff]/30 focus:bg-white/[0.05] transition-all"
+                placeholder="Ex. Lire 20 pages..."
+                className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 font-semibold text-base placeholder:text-slate-300 focus:outline-none focus:border-blue-500 focus:bg-white focus:shadow-sm transition-all"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 autoFocus
@@ -69,14 +69,14 @@ export default function HabitForm({
 
             {/* Universe Selector */}
             <div className="space-y-3">
-               <label className="label-caps px-1">Univers de déploiement</label>
+               <label className="label-caps px-1">Secteur d'activité</label>
                <div className="grid grid-cols-2 gap-3">
                 <button 
                   onClick={() => setFormData({ ...formData, category: 'perso' })}
                   className={`py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
                     formData.category === 'perso' 
-                    ? 'bg-[#00f2ff] text-black border-transparent shadow-[0_0_20px_rgba(0,242,255,0.3)]' 
-                    : 'bg-white/[0.03] border-white/[0.05] text-white/30'
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-blue-200 shadow-lg' 
+                    : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-300'
                   }`}
                 >
                   Personnel
@@ -85,8 +85,8 @@ export default function HabitForm({
                   onClick={() => setFormData({ ...formData, category: 'pro' })}
                   className={`py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
                     formData.category === 'pro' 
-                    ? 'bg-[#00f2ff] text-black border-transparent shadow-[0_0_20px_rgba(0,242,255,0.3)]' 
-                    : 'bg-white/[0.03] border-white/[0.05] text-white/30'
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-blue-200 shadow-lg' 
+                    : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-300'
                   }`}
                 >
                   Professionnel
@@ -96,24 +96,24 @@ export default function HabitForm({
 
             {/* intensity */}
             <div className="space-y-3">
-              <label className="label-caps px-1">Intensité neurologique</label>
+              <label className="label-caps px-1">Intensité</label>
               <div className="flex gap-2">
                 {[
-                  { id: 'light', label: 'Zen', color: 'text-emerald-400' },
-                  { id: 'medium', label: 'Focus', color: 'text-amber-400' },
-                  { id: 'chronophage', label: 'Hardcore', color: 'text-rose-500' }
+                  { id: 'light', label: 'Zen', color: 'text-emerald-500', bg: 'bg-emerald-50' },
+                  { id: 'medium', label: 'Focus', color: 'text-amber-500', bg: 'bg-amber-50' },
+                  { id: 'chronophage', label: 'Hard', color: 'text-rose-500', bg: 'bg-rose-50' }
                 ].map(item => (
                   <button 
                     key={item.id}
                     onClick={() => setFormData({ ...formData, mentalLoad: item.id })}
-                    className={`flex-1 py-3.5 rounded-xl text-[9px] font-bold uppercase tracking-widest border transition-all duration-500 ${
+                    className={`flex-1 py-3.5 rounded-xl text-[9px] font-bold uppercase tracking-widest border transition-all duration-300 ${
                       formData.mentalLoad === item.id 
-                      ? 'bg-white/10 text-white border-white/20' 
-                      : 'bg-white/[0.02] text-white/20 border-white/[0.04]'
+                      ? `${item.bg} ${item.color} border-transparent shadow-sm scale-[1.02]` 
+                      : 'bg-slate-50 text-slate-400 border-slate-100'
                     }`}
                   >
                     <div className="flex flex-col items-center gap-1">
-                      <Zap size={10} className={formData.mentalLoad === item.id ? item.color : 'text-white/10'} />
+                      <Zap size={10} className={formData.mentalLoad === item.id ? item.color : 'text-slate-200'} fill={formData.mentalLoad === item.id ? 'currentColor' : 'none'} />
                       {item.label}
                     </div>
                   </button>
@@ -125,10 +125,10 @@ export default function HabitForm({
           {/* Submit Button */}
           <button 
             onClick={() => onSubmit(formData)}
-            className="w-full h-16 bg-[#00f2ff] hover:bg-[#00e2ff] text-black rounded-2xl font-bold flex items-center justify-center gap-3 shadow-[0_15px_40px_rgba(0,242,255,0.2)] active:scale-95 transition-all mt-4"
+            className="w-full h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold flex items-center justify-center gap-3 shadow-[0_15px_40px_rgba(37,99,235,0.3)] active:scale-95 transition-all mt-4"
           >
             <Check size={20} strokeWidth={3} />
-            <span className="uppercase tracking-widest text-xs">Initialiser la Mission</span>
+            <span className="uppercase tracking-widest text-xs">Valider l'objectif</span>
           </button>
         </div>
       </div>

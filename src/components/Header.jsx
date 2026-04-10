@@ -15,48 +15,48 @@ export default function Header({
   return (
     <header className="pt-8 pb-4 animate-in">
       {/* Top Bar */}
-      <div className="flex justify-between items-center px-4 mb-2">
-        <button className="w-10 h-10 flex items-center justify-center bg-white/[0.03] border border-white/[0.06] rounded-xl text-white/40 hover:text-white transition-all" aria-label="Menu">
+      <div className="flex justify-between items-center px-2 mb-2">
+        <button className="w-10 h-10 flex items-center justify-center bg-slate-50 border border-slate-100 rounded-xl text-slate-400 hover:text-slate-600 transition-all" aria-label="Menu">
           <Menu size={18} />
         </button>
         
         <div className="flex flex-col items-center">
-          <span className="label-caps !text-[9px] mb-0.5 opacity-50">Pulse Center</span>
-          <div className="flex items-center gap-1.5 px-3 py-1 bg-white/[0.03] rounded-full border border-white/[0.05]">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#00f2ff] shadow-[0_0_8px_#00f2ff] animate-pulse" />
-            <span className="text-[10px] font-bold tracking-widest text-white/90 uppercase">Habit Pulse</span>
+          <span className="label-caps !text-[9px] mb-0.5 text-blue-600/50">Performance Hub</span>
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-white rounded-full border border-slate-100 shadow-sm">
+            <Zap size={12} className="text-blue-600 fill-blue-600" />
+            <span className="text-[10px] font-bold tracking-widest text-slate-800 uppercase">Habits Pulse</span>
           </div>
         </div>
 
-        <button className="w-10 h-10 flex items-center justify-center bg-white/[0.03] border border-white/[0.06] rounded-xl text-white/40 hover:text-white transition-all" aria-label="Notifications">
+        <button className="w-10 h-10 flex items-center justify-center bg-slate-50 border border-slate-100 rounded-xl text-slate-400 hover:text-slate-600 transition-all" aria-label="Notifications">
           <Bell size={18} />
         </button>
       </div>
 
-      {/* Main Gauge System */}
-      <div className="relative flex flex-col items-center mt-10">
+      {/* Main Gauge System - Pristine Light */}
+      <div className="relative flex flex-col items-center mt-12">
         <div className="relative w-72 h-72 flex items-center justify-center">
-          {/* Subtle Outer Glow */}
-          <div className="absolute inset-0 rounded-full bg-[#00f2ff]/5 blur-[60px]" />
+          {/* Subtle Outer Shadow for depth */}
+          <div className="absolute inset-4 rounded-full bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)]" />
           
-          <svg className="w-full h-full transform -rotate-90">
+          <svg className="w-full h-full transform -rotate-90 relative z-10">
             {/* Background Track */}
             <circle
               cx="144"
               cy="144"
               r={radius}
               stroke="currentColor"
-              strokeWidth="12"
+              strokeWidth="8"
               fill="transparent"
-              className="text-white/[0.03]"
+              className="text-slate-50"
             />
             {/* Progress Stroke */}
             <circle
               cx="144"
               cy="144"
               r={radius}
-              stroke="url(#cyanGradient)"
-              strokeWidth="12"
+              stroke="url(#blueGradient)"
+              strokeWidth="10"
               fill="transparent"
               strokeDasharray={circumference}
               style={{ 
@@ -67,60 +67,51 @@ export default function Header({
               className="gauge-progress"
             />
             <defs>
-              <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#00f2ff" />
-                <stop offset="100%" stopColor="#7000ff" />
+              <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#2563eb" />
+                <stop offset="100%" stopColor="#4f46e5" />
               </linearGradient>
             </defs>
           </svg>
           
           {/* Center Content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-[10px] font-bold tracking-[0.4em] text-white/20 mb-2">COMPLÉTION</span>
-            <div className="flex items-baseline">
-              <span className="text-7xl font-bold tracking-tighter text-white leading-none">
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
+            <span className="text-[10px] font-bold tracking-[0.3em] text-slate-300 mb-1">SCORE DU JOUR</span>
+            <div className="flex items-baseline mb-1">
+              <span className="text-7xl font-extrabold tracking-tighter text-slate-800 leading-none">
                 {percentage}
               </span>
-              <span className="text-xl font-bold text-[#00f2ff]/60 ml-1">%</span>
+              <span className="text-xl font-bold text-blue-500/80 ml-1">%</span>
             </div>
-            <div className="mt-4 flex gap-1">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div 
-                  key={i} 
-                  className={`indicator-glow ${percentage >= i * 20 ? 'active' : 'inactive'}`} 
-                />
-              ))}
-            </div>
+            <p className="text-[10px] font-bold text-slate-400 tracking-tighter uppercase">{totalCount - progressCount} à faire</p>
           </div>
         </div>
 
-        <div className="mt-10 text-center">
-          <h2 className="text-2xl font-bold text-white tracking-tight leading-none mb-2">Optimisation de vie.</h2>
-          <p className="label-caps">
-            {totalCount - progressCount} {totalCount - progressCount > 1 ? 'Objectifs Restants' : 'Objectif Restant'} aujourd'hui
-          </p>
+        <div className="mt-12 text-center">
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight leading-none mb-1">Poursuivez l'effort.</h2>
+          <p className="text-xs font-medium text-slate-400">Optimisation de routine quotidienne</p>
         </div>
       </div>
 
-      {/* View Switcher */}
-      <div className="px-5 mt-12 mb-8">
-        <div className="bg-white/[0.03] rounded-2xl p-1.5 flex border border-white/[0.06] shadow-xl">
+      {/* Pristine Tab Switcher */}
+      <div className="px-2 mt-12 mb-4">
+        <div className="bg-slate-50 rounded-2xl p-1 flex border border-slate-100">
           <button 
             onClick={() => setView('perso')}
-            className={`flex-1 py-3.5 rounded-xl text-[10px] font-bold transition-all duration-500 uppercase tracking-[0.2em] ${
+            className={`flex-1 py-3 rounded-xl text-[10px] font-bold transition-all duration-300 uppercase tracking-[0.15em] ${
               view === 'perso' 
-              ? 'bg-[#00f2ff] text-black shadow-[0_0_20px_rgba(0,242,255,0.4)]' 
-              : 'text-white/30 hover:text-white/60'
+              ? 'bg-white text-blue-600 shadow-sm border border-slate-100' 
+              : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             Personnel
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex-1 py-3.5 rounded-xl text-[10px] font-bold transition-all duration-500 uppercase tracking-[0.2em] ${
+            className={`flex-1 py-3 rounded-xl text-[10px] font-bold transition-all duration-300 uppercase tracking-[0.15em] ${
               view === 'pro' 
-              ? 'bg-[#00f2ff] text-black shadow-[0_0_20px_rgba(0,242,255,0.4)]' 
-              : 'text-white/30 hover:text-white/60'
+              ? 'bg-white text-blue-600 shadow-sm border border-slate-100' 
+              : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             Professionnel
