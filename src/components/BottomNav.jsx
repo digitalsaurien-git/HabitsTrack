@@ -24,7 +24,7 @@ export default function BottomNav({ activeTab, setActiveTab }) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative flex items-center justify-center w-12 h-12 rounded-xl transition-all ${
+            className={`group relative flex items-center justify-center w-12 h-12 rounded-xl transition-all ${
               isActive ? 'text-white' : 'text-indigo-300 hover:text-white'
             }`}
           >
@@ -36,6 +36,12 @@ export default function BottomNav({ activeTab, setActiveTab }) {
               strokeWidth={isActive ? 2.5 : 2}
               className="relative z-10"
             />
+            
+            {/* Tooltip on hover */}
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all pointer-events-none shadow-xl border border-slate-700/50 scale-90 group-hover:scale-100 whitespace-nowrap">
+              {tab.label}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-slate-900/90" />
+            </div>
           </button>
         );
       })}
