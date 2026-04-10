@@ -77,10 +77,13 @@ export default function Header({
             </p>
           </div>
         </div>
+        
+        {/* Spacer for undeniable interligne */}
+        <div className="h-20" />
       </div>
 
       {/* Styled Tabs */}
-      <div className="mt-32 px-2">
+      <div className="mt-4 px-2">
         <div className="bg-slate-200/50 p-1 rounded-xl flex gap-1">
           <button 
             onClick={() => setView('perso')}
