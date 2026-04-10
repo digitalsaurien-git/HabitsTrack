@@ -71,8 +71,8 @@ export default function Header({
 
         <div className="mt-12 text-center px-6">
           <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Continuez ainsi.</h2>
-          <div className="mt-8">
-            <p className="text-[13px] font-bold text-slate-400 capitalize bg-slate-100/50 inline-block px-4 py-1.5 rounded-full tracking-wide">
+          <div className="mt-2">
+            <p className="text-[14px] font-bold text-slate-400 capitalize bg-slate-100/50 inline-block px-5 py-2 rounded-full tracking-wide">
               {totalCount - progressCount} Missions à compléter
             </p>
           </div>
@@ -80,7 +80,7 @@ export default function Header({
       </div>
 
       {/* Styled Tabs */}
-      <div className="mt-20 px-2">
+      <div className="mt-32 px-2">
         <div className="bg-slate-200/50 p-1 rounded-xl flex gap-1">
           <button 
             onClick={() => setView('perso')}

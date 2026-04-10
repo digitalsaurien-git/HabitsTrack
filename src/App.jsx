@@ -101,9 +101,8 @@ export default function App() {
         <main className="transition-all duration-500 pt-8">
           {activeTab === 'dashboard' ? (
             <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between px-3 mt-4">
-                <h3 className="text-[12px] font-bold uppercase tracking-widest text-orange-600">Missions quotidiennes</h3>
-                <span className="text-[11px] font-bold text-slate-400">{filteredHabits.length} Objectifs</span>
+              <div className="flex flex-col items-center gap-1 mt-6">
+                <h3 className="text-[14px] font-bold uppercase tracking-widest text-orange-600">Missions quotidiennes : {filteredHabits.length} Objectifs</h3>
               </div>
               
               {filteredHabits.map(habit => (
