@@ -98,7 +98,7 @@ export default function App() {
           totalCount={habits.length}
         />
 
-        <main className="transition-all duration-500 pt-6">
+        <main className="transition-all duration-500 pt-14">
           {activeTab === 'dashboard' ? (
             <div className="flex flex-col gap-5">
               <div className="flex items-center justify-between px-2 mb-2">
