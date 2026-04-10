@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Menu } from 'lucide-react';
+import { Zap, Menu, Bell } from 'lucide-react';
 
 export default function Header({ 
   view, 
@@ -13,97 +13,114 @@ export default function Header({
   const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <header className="pt-8 pb-2 animate-kinetic">
+    <header className="pt-8 pb-4 animate-in">
       {/* Top Bar */}
-      <div className="flex justify-between items-center px-4">
-        <button className="text-[#444] hover:text-white transition-all p-2 bg-white/5 rounded-xl border border-white/5" aria-label="Menu">
+      <div className="flex justify-between items-center px-4 mb-2">
+        <button className="w-10 h-10 flex items-center justify-center bg-white/[0.03] border border-white/[0.06] rounded-xl text-white/40 hover:text-white transition-all" aria-label="Menu">
           <Menu size={18} />
         </button>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.03] rounded-full border border-white/[0.05]">
-          <div className="w-5 h-5 rounded-md bg-primary flex items-center justify-center shadow-glow">
-            <Zap size={14} fill="white" className="text-white" />
+        
+        <div className="flex flex-col items-center">
+          <span className="label-caps !text-[9px] mb-0.5 opacity-50">Pulse Center</span>
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-white/[0.03] rounded-full border border-white/[0.05]">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#00f2ff] shadow-[0_0_8px_#00f2ff] animate-pulse" />
+            <span className="text-[10px] font-bold tracking-widest text-white/90 uppercase">Habit Pulse</span>
           </div>
-          <span className="text-[12px] font-black italic tracking-tighter text-white/90 uppercase">HabitsTrack</span>
         </div>
-        <div className="w-10 h-10 rounded-2xl border border-white/10 p-0.5 overflow-hidden shadow-2xl">
-          <img 
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop" 
-            alt="Profil" 
-            className="w-full h-full rounded-[14px] object-cover grayscale brightness-125"
-          />
-        </div>
+
+        <button className="w-10 h-10 flex items-center justify-center bg-white/[0.03] border border-white/[0.06] rounded-xl text-white/40 hover:text-white transition-all" aria-label="Notifications">
+          <Bell size={18} />
+        </button>
       </div>
 
-      {/* Circular Progress Section */}
-      <div className="relative flex flex-col items-center mt-12">
-        <div className="relative w-64 h-64 flex items-center justify-center">
+      {/* Main Gauge System */}
+      <div className="relative flex flex-col items-center mt-10">
+        <div className="relative w-72 h-72 flex items-center justify-center">
+          {/* Subtle Outer Glow */}
+          <div className="absolute inset-0 rounded-full bg-[#00f2ff]/5 blur-[60px]" />
+          
           <svg className="w-full h-full transform -rotate-90">
+            {/* Background Track */}
             <circle
-              cx="128"
-              cy="128"
+              cx="144"
+              cy="144"
               r={radius}
-              stroke="white"
-              strokeWidth="14"
+              stroke="currentColor"
+              strokeWidth="12"
               fill="transparent"
-              className="opacity-[0.03]"
+              className="text-white/[0.03]"
             />
+            {/* Progress Stroke */}
             <circle
-              cx="128"
-              cy="128"
+              cx="144"
+              cy="144"
               r={radius}
-              stroke="url(#premiumGradient)"
-              strokeWidth="14"
+              stroke="url(#cyanGradient)"
+              strokeWidth="12"
               fill="transparent"
               strokeDasharray={circumference}
-              style={{ strokeDashoffset: offset }}
+              style={{ 
+                strokeDashoffset: offset,
+                transition: 'stroke-dashoffset 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)'
+              }}
               strokeLinecap="round"
-              className="progress-ring-circle"
+              className="gauge-progress"
             />
             <defs>
-              <linearGradient id="premiumGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#ffb38a" />
-                <stop offset="100%" stopColor="#ff6b00" />
+              <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#00f2ff" />
+                <stop offset="100%" stopColor="#7000ff" />
               </linearGradient>
             </defs>
           </svg>
+          
+          {/* Center Content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="flex items-baseline mb-[-8px]">
-              <span className="text-[88px] font-black tracking-tighter text-white leading-none">
+            <span className="text-[10px] font-bold tracking-[0.4em] text-white/20 mb-2">COMPLÉTION</span>
+            <div className="flex items-baseline">
+              <span className="text-7xl font-bold tracking-tighter text-white leading-none">
                 {percentage}
               </span>
-              <span className="text-2xl font-black text-primary ml-1">%</span>
+              <span className="text-xl font-bold text-[#00f2ff]/60 ml-1">%</span>
             </div>
-            <span className="label-caps opacity-30 tracking-[0.4em] text-[10px]">OBJECTIF</span>
+            <div className="mt-4 flex gap-1">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div 
+                  key={i} 
+                  className={`indicator-glow ${percentage >= i * 20 ? 'active' : 'inactive'}`} 
+                />
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="mt-8 text-center animate-kinetic">
-          <h2 className="text-3xl font-black text-white tracking-tight leading-none mb-3">Gardez le rythme.</h2>
-          <p className="text-[11px] text-text-dim font-black uppercase tracking-[0.3em] opacity-40">
-            {totalCount - progressCount} {totalCount - progressCount > 1 ? 'HABITUDES RESTANTES' : 'HABITUDE RESTANTE'}
+        <div className="mt-10 text-center">
+          <h2 className="text-2xl font-bold text-white tracking-tight leading-none mb-2">Optimisation de vie.</h2>
+          <p className="label-caps">
+            {totalCount - progressCount} {totalCount - progressCount > 1 ? 'Objectifs Restants' : 'Objectif Restant'} aujourd'hui
           </p>
         </div>
       </div>
 
-      {/* Toggle Tabs - MOVED even lower for more space (mb-16) */}
-      <div className="px-2 mt-12 mb-16 px-4">
-        <div className="bg-[#121212] rounded-[32px] p-1.5 flex border border-white/5 shadow-premium">
+      {/* View Switcher */}
+      <div className="px-5 mt-12 mb-8">
+        <div className="bg-white/[0.03] rounded-2xl p-1.5 flex border border-white/[0.06] shadow-xl">
           <button 
             onClick={() => setView('perso')}
-            className={`flex-1 py-4 rounded-[24px] text-[11px] font-black transition-all duration-700 uppercase tracking-[0.2em] ${
+            className={`flex-1 py-3.5 rounded-xl text-[10px] font-bold transition-all duration-500 uppercase tracking-[0.2em] ${
               view === 'perso' 
-              ? 'bg-white text-black shadow-luxe scale-[1.03]' 
-              : 'text-text-dim/50 hover:text-white'
+              ? 'bg-[#00f2ff] text-black shadow-[0_0_20px_rgba(0,242,255,0.4)]' 
+              : 'text-white/30 hover:text-white/60'
             }`}
           >
             Personnel
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex-1 py-4 rounded-[24px] text-[11px] font-black transition-all duration-700 uppercase tracking-[0.2em] ${
+            className={`flex-1 py-3.5 rounded-xl text-[10px] font-bold transition-all duration-500 uppercase tracking-[0.2em] ${
               view === 'pro' 
-              ? 'bg-white text-black shadow-luxe scale-[1.03]' 
-              : 'text-text-dim/50 hover:text-white'
+              ? 'bg-[#00f2ff] text-black shadow-[0_0_20px_rgba(0,242,255,0.4)]' 
+              : 'text-white/30 hover:text-white/60'
             }`}
           >
             Professionnel
