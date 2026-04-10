@@ -98,12 +98,12 @@ export default function App() {
           totalCount={habits.length}
         />
 
-        <main className="transition-all duration-500 pt-14">
+        <main className="transition-all duration-500 pt-24">
           {activeTab === 'dashboard' ? (
-            <div className="flex flex-col gap-5">
-              <div className="flex items-center justify-between px-2 mb-2">
-                <h3 className="label-caps !text-[12px]">Missions quotidiennes</h3>
-                <span className="text-[11px] font-bold text-slate-400">{filteredHabits.length} Objectifs</span>
+            <div className="flex flex-col gap-8">
+              <div className="flex items-center justify-between px-3 mb-4">
+                <h3 className="label-caps !text-[16px] !text-slate-800">Missions quotidiennes</h3>
+                <span className="text-[14px] font-bold text-slate-400">{filteredHabits.length} Objectifs</span>
               </div>
               
               {filteredHabits.map(habit => (

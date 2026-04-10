@@ -69,20 +69,20 @@ export default function Header({
           </div>
         </div>
 
-        <div className="mt-16 text-center px-6">
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3">Continuez ainsi.</h2>
-          <p className="text-[12px] font-bold text-slate-400/80 uppercase tracking-[0.2em]">{totalCount - progressCount} Missions à compléter</p>
+        <div className="mt-20 text-center px-6">
+          <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">Continuez ainsi.</h2>
+          <p className="text-[14px] font-bold text-slate-400/80 uppercase tracking-[0.3em] mt-6">{totalCount - progressCount} Missions à compléter</p>
         </div>
       </div>
 
       {/* Styled Tabs */}
-      <div className="mt-24 px-2">
+      <div className="mt-32 px-2">
         <div className="bg-slate-200/50 p-1 rounded-xl flex gap-1">
           <button 
             onClick={() => setView('perso')}
-            className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold transition-all uppercase tracking-wider ${
+            className={`flex-1 py-4 rounded-xl text-[15px] font-extrabold transition-all uppercase tracking-wider ${
               view === 'perso' 
-              ? 'bg-white text-indigo-600 shadow-sm' 
+              ? 'bg-white text-indigo-600 shadow-md' 
               : 'text-slate-500 hover:text-slate-700'
             }`}
           >
@@ -90,9 +90,9 @@ export default function Header({
           </button>
           <button 
             onClick={() => setView('pro')}
-            className={`flex-1 py-2.5 rounded-lg text-[10px] font-bold transition-all uppercase tracking-wider ${
+            className={`flex-1 py-4 rounded-xl text-[15px] font-extrabold transition-all uppercase tracking-wider ${
               view === 'pro' 
-              ? 'bg-white text-indigo-600 shadow-sm' 
+              ? 'bg-white text-indigo-600 shadow-md' 
               : 'text-slate-500 hover:text-slate-700'
             }`}
           >
