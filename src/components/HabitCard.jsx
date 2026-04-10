@@ -24,29 +24,29 @@ export default function HabitCard({ habit, onToggle, onEdit, isCompletedToday })
 
   return (
     <div 
-      className={`p-4 rounded-xl flex items-center justify-between border transition-all duration-300 ${
+      className={`p-5 rounded-2xl flex items-center justify-between border transition-all duration-400 ${
         isCompletedToday 
         ? 'bg-slate-50 border-slate-200 opacity-60' 
-        : 'bg-white border-slate-200 shadow-sm hover:border-indigo-200'
+        : 'bg-white border-slate-200 shadow-sm hover:border-indigo-300'
       }`}
     >
-      <div className="flex items-center gap-4 flex-1 min-w-0">
-        <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${
+      <div className="flex items-center gap-5 flex-1 min-w-0">
+        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
           isCompletedToday ? 'bg-slate-200 text-slate-400' : 'bg-indigo-50 text-indigo-600'
         }`}>
           {getIcon(habit.title)}
         </div>
         
         <div className="min-w-0 flex flex-col justify-center">
-          <h3 className={`text-[15px] font-bold tracking-tight truncate transition-all ${
-            isCompletedToday ? 'text-slate-400 line-through' : 'text-slate-800'
+          <h3 className={`text-[17px] font-extrabold tracking-tight truncate transition-all ${
+            isCompletedToday ? 'text-slate-400 line-through' : 'text-slate-900'
           }`}>
             {habit.title}
           </h3>
-          <div className="flex items-center gap-1.5 mt-0.5 opacity-60">
-            <Zap size={10} fill={streak > 0 ? "currentColor" : "none"} className={streak > 0 ? "text-indigo-600" : "text-slate-400"} />
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tight">
-              Série : {streak}j
+          <div className="flex items-center gap-2 mt-1 opacity-70">
+            <Zap size={11} fill={streak > 0 ? "currentColor" : "none"} className={streak > 0 ? "text-indigo-600" : "text-slate-400"} />
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">
+              Série : {streak} jours
             </span>
           </div>
         </div>

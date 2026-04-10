@@ -69,14 +69,14 @@ export default function Header({
           </div>
         </div>
 
-        <div className="mt-8 text-center px-4">
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight leading-none mb-2">Continuez ainsi.</h2>
-          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{totalCount - progressCount} à compléter</p>
+        <div className="mt-10 text-center px-6">
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3">Continuez ainsi.</h2>
+          <p className="text-[12px] font-bold text-slate-400/80 uppercase tracking-[0.2em]">{totalCount - progressCount} Missions à compléter</p>
         </div>
       </div>
 
       {/* Styled Tabs */}
-      <div className="mt-10 px-1">
+      <div className="mt-14 px-2">
         <div className="bg-slate-200/50 p-1 rounded-xl flex gap-1">
           <button 
             onClick={() => setView('perso')}
